@@ -1,0 +1,66 @@
+name: Publish web bundle
+
+# Update channel for The Whole Woman Score Android app.
+# When bundle-src/index.html or VERSION changes on main, this workflow:
+#   1. sanity-checks that bundle-src/index.html is stamped with VERSION,
+#   2. zips it as bundles/wws-web-<VERSION>.zip,
+#   3. rewrites manifest.json with the version, the zip's raw URL and its
+#      SHA-256,
+#   4. commits the zip + manifest back to main.
+# Installed apps poll manifest.json, download the zip, verify the hash,
+# and run the new bundle on their next launch. Pushes made with the
+# workflow token do not retrigger workflows, so this cannot loop.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'bundle-src/**'
+      - 'VERSION'
+      - '.github/workflows/publish-bundle.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build bundle zip + manifest
+        run: |
+          set -euo pipefail
+          VERSION=$(tr -d '[:space:]' < VERSION)
+          echo "Publishing bundle version: $VERSION"
+          grep -q "The Whole Woman Score" bundle-src/index.html
+          grep -q "__WWS_BUNDLE_VERSION__ = \"$VERSION\"" bundle-src/index.html || {
+            echo "ERROR: bundle-src/index.html is not stamped with version $VERSION."
+            echo "Run scripts/inject-updater.js from the app repo first (see its UPDATE-GUIDE.md)."
+            exit 1
+          }
+          mkdir -p bundles staging
+          cp bundle-src/index.html staging/index.html
+          (cd staging && zip -q -9 -X "../bundles/wws-web-$VERSION.zip" index.html)
+          SHA=$(sha256sum "bundles/wws-web-$VERSION.zip" | cut -d' ' -f1)
+          cat > manifest.json <<EOF
+          {
+            "version": "$VERSION",
+            "bundleUrl": "https://raw.githubusercontent.com/ToooMuchMoxie/whole-woman-score-updates/main/bundles/wws-web-$VERSION.zip",
+            "sha256": "$SHA"
+          }
+          EOF
+          cat manifest.json
+
+      - name: Commit bundle + manifest
+        run: |
+          git config user.name "wws-update-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add bundles manifest.json
+          if git diff --cached --quiet; then
+            echo "No changes to publish."
+            exit 0
+          fi
+          git commit -m "Publish web bundle $(tr -d '[:space:]' < VERSION)"
+          git push
