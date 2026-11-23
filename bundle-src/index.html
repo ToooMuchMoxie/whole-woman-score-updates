@@ -1,0 +1,2045 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<link rel="icon" href="data:," />
+<title>The Whole Woman Score — by Tooo Much Moxie</title>
+<style>
+:root{
+  --bg:#100e0a; --bg2:#171410; --card:#1c1913; --card2:#242017;
+  --line:#3a3325; --ink:#f2ead8; --muted:#b8ab8d; --faint:#8d8268;
+  --gold:#c9a227; --gold2:#e8c766; --red:#e4573d; --green:#7fb069;
+  --amber:#e0a458; --radius:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+h1,h2,h3,.serif{font-family:Georgia,"Times New Roman",serif}
+button,[role="button"],select,input,textarea{font:inherit}
+button,select,input[type="text"],textarea{min-height:44px}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 64px}
+header.top{padding:28px 0 6px;text-align:left}
+.kicker{color:var(--gold);letter-spacing:.18em;font-size:.72rem;font-weight:700;text-transform:uppercase}
+h1{font-size:2rem;line-height:1.12;margin:.35rem 0 .4rem}
+.tagline{color:var(--muted);font-size:1.02rem;margin:0 0 4px}
+.byline{color:var(--faint);font-size:.85rem}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 6px;position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:20}
+.tab{flex:1 1 auto;min-width:120px;padding:12px 10px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;font-weight:700;cursor:pointer;min-height:48px}
+.tab[aria-selected="true"]{background:var(--gold);color:#171204;border-color:var(--gold)}
+.panel{display:none}
+.panel.active{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin:14px 0}
+.card h2{margin:0 0 4px;font-size:1.3rem}
+.card h3{margin:18px 0 6px;font-size:1.05rem}
+.sub{color:var(--muted);font-size:.92rem;margin:0 0 10px}
+label.flabel{display:block;font-weight:700;margin:12px 0 6px}
+input[type="text"],textarea,select{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:10px 12px}
+textarea{min-height:40px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.row2{grid-template-columns:1fr}}
+.cat{margin:20px 0 4px;border-top:2px solid var(--gold);padding-top:10px}
+.cat h3{margin:0;font-size:1.08rem}
+.cat .pts{color:var(--gold);font-weight:700;font-size:.85rem;letter-spacing:.06em}
+.trait{padding:12px 0;border-bottom:1px solid var(--line)}
+.trait-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.trait-name{font-weight:700}
+.trait-max{color:var(--faint);font-size:.8rem;white-space:nowrap}
+.trait-val{font-family:Georgia,serif;font-size:1.35rem;color:var(--gold2);min-width:64px;text-align:right}
+input[type="range"]{width:100%;accent-color:var(--gold);height:36px}
+.anchor{font-size:.86rem;color:var(--muted);background:var(--card2);border-radius:8px;padding:7px 10px;margin-top:2px}
+.anchor b{color:var(--ink)}
+.trait-tools{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;align-items:center}
+label.check{display:inline-flex;gap:8px;align-items:center;min-height:36px;padding:4px 2px;cursor:pointer;font-size:.9rem}
+label.check input{width:20px;height:20px;accent-color:var(--gold)}
+.note-wrap{margin-top:6px}
+.note-wrap summary{cursor:pointer;color:var(--gold2);font-size:.88rem;min-height:36px;display:flex;align-items:center}
+.checkgrid{display:grid;grid-template-columns:1fr 1fr;gap:2px 18px}
+@media(max-width:560px){.checkgrid{grid-template-columns:1fr}}
+.tox-level{font-weight:700;margin-top:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:10px;border:1px solid var(--gold);background:var(--gold);color:#171204;font-weight:800;cursor:pointer;min-height:48px;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--gold2)}
+.btn.danger{border-color:var(--red);color:var(--red);background:transparent}
+.btn.small{min-height:44px;padding:9px 13px;font-size:.9rem}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.examplebar{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 0}
+.examplebar button{background:var(--card2);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:9px 14px;cursor:pointer;min-height:44px;font-size:.88rem}
+/* Result */
+#result{scroll-margin-top:90px}
+.scores{display:flex;gap:14px;flex-wrap:wrap;margin:8px 0}
+.scorebox{flex:1 1 150px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+.scorebox .big{font-family:Georgia,serif;font-size:3rem;line-height:1;color:var(--gold2)}
+.scorebox .lbl{color:var(--muted);font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+.tier{font-family:Georgia,serif;font-size:1.45rem;margin:6px 0 2px}
+.headline{font-size:1.12rem;font-weight:800}
+.stamp{display:inline-block;border:2px solid var(--red);color:var(--red);font-weight:900;letter-spacing:.08em;padding:4px 10px;border-radius:8px;transform:rotate(-2deg);margin:6px 4px 6px 0;text-transform:uppercase;font-size:.85rem}
+.stamp.prov{border-color:var(--amber);color:var(--amber)}
+.stamp.db{font-size:1rem}
+.verdict-p{font-size:1.02rem}
+ul.tight{margin:6px 0 6px 18px;padding:0}
+ul.tight li{margin:4px 0}
+.flag-g{color:var(--green)} .flag-r{color:var(--red)}
+.mutelist{color:var(--muted);font-size:.9rem}
+.wheelwrap{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.wheelwrap svg{flex:0 0 auto}
+.catbars{flex:1 1 240px}
+.catbar{margin:7px 0}
+.catbar .cb-head{display:flex;justify-content:space-between;font-size:.88rem}
+.bar{height:9px;background:var(--bg2);border-radius:99px;overflow:hidden;border:1px solid var(--line)}
+.bar i{display:block;height:100%;background:var(--gold)}
+.bar i.weak{background:var(--red)}
+/* Listen bar */
+.listenbar{border:1px solid var(--gold);border-radius:12px;padding:12px 14px;margin:16px 0;background:var(--card2)}
+.listenbar .lb-title{font-weight:900;display:flex;align-items:center;gap:8px}
+.listenbar .now{color:var(--muted);font-size:.9rem;margin-top:6px;min-height:1.3em}
+.listenbar .btnrow{margin:10px 0 0}
+/* Saved */
+.profile-item{border:1px solid var(--line);border-radius:10px;padding:12px;margin:10px 0;background:var(--bg2)}
+.profile-item .pi-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
+.profile-item .pi-score{font-family:Georgia,serif;color:var(--gold2);font-size:1.3rem}
+table.cmp{width:100%;border-collapse:collapse;font-size:.9rem}
+table.cmp th,table.cmp td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left}
+table.cmp td.win{color:var(--gold2);font-weight:800}
+.stack{display:block}
+@media(max-width:640px){
+  table.cmp thead{display:none}
+  table.cmp tr{display:block;border:1px solid var(--line);border-radius:10px;margin:8px 0;padding:6px}
+  table.cmp td{display:flex;justify-content:space-between;border-bottom:none;padding:5px 8px}
+}
+#cardImg{max-width:100%;height:auto;border-radius:12px;border:1px solid var(--line);display:block;margin:10px 0}
+#card-fullscreen{position:fixed;inset:0;z-index:999;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:16px;overflow:auto}
+#card-fullscreen img{max-width:100%;height:auto;display:block}
+#card-fullscreen .fs-note{color:#f2ead8;text-align:center;margin:10px 0;font-weight:700}
+#share-feedback{font-weight:700;min-height:1.2em;margin:6px 0}
+footer{border-top:1px solid var(--line);margin-top:34px;padding:18px 0;color:var(--faint);font-size:.88rem}
+footer .brand{color:var(--muted);font-weight:700}
+.hidden{display:none!important}
+/* Print scorecard */
+#printSheet{display:none}
+@media print{
+  body{background:#fff;color:#000}
+  header.top,.tabs,.panel,#result,footer,.no-print{display:none!important}
+  #printSheet{display:block!important;color:#000}
+  #printSheet table{width:100%;border-collapse:collapse}
+  #printSheet td,#printSheet th{border:1px solid #000;padding:6px;font-size:12px;text-align:left}
+}
+#printSheet .ps-line{border-bottom:1px solid #000;height:22px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div class="kicker">Balance over beauty</div>
+  <h1>The Whole Woman Score</h1>
+  <p class="tagline">Not just the look. The whole woman. Score her on 24 traits out of 100 — and score yourself on The Whole Man Score before you judge.</p>
+  <p class="byline">By Tooo Much Moxie</p>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Modes">
+  <button class="tab" role="tab" id="tab-her" aria-selected="true" data-mode="her">Score Her</button>
+  <button class="tab" role="tab" id="tab-him" aria-selected="false" data-mode="him">Score Yourself</button>
+  <button class="tab" role="tab" id="tab-saved" aria-selected="false" data-mode="saved">Saved &amp; Compare</button>
+  <button class="tab" role="tab" id="tab-match" aria-selected="false" data-mode="match">Match View</button>
+  <button class="savedjump" id="btn-saved-top" type="button">Saved Profiles (0)</button>
+</nav>
+
+<!-- ============ HER ============ -->
+<section class="panel active" id="panel-her" aria-labelledby="tab-her">
+  <div class="card">
+    <h2>Score Her</h2>
+    <p class="sub">Slide each trait from 0 to its max. Score what you have actually seen — if you haven't seen it, mark <b>Not observed yet</b> instead of guessing.</p>
+    <label class="flabel" for="her-name">Her name (optional)</label>
+    <input type="text" id="her-name" placeholder="e.g. Maya" autocomplete="off" />
+    <div class="row2">
+      <div><label class="flabel" for="her-height">Height (optional, context only)</label><input type="text" id="her-height" placeholder="e.g. 5'6&quot;" autocomplete="off" /></div>
+      <div><label class="flabel" for="her-weight">Weight (optional, context only)</label><input type="text" id="her-weight" placeholder="e.g. 145 lb" autocomplete="off" /></div>
+    </div>
+    <label class="flabel" for="her-known">How long have you known her?</label>
+    <select id="her-known">
+      <option value="lt2w">Less than 2 weeks</option>
+      <option value="2-4w">2–4 weeks</option>
+      <option value="1-3m" selected>1–3 months</option>
+      <option value="3-6m">3–6 months</option>
+      <option value="6-12m">6–12 months</option>
+      <option value="1y+">Over a year</option>
+    </select>
+    <div class="examplebar">
+      <button type="button" id="ex-balanced">Load balanced example</button>
+      <button type="button" id="ex-toxic">Load high-toxicity example</button>
+      <button type="button" id="her-reset">Reset</button>
+    </div>
+    <div id="her-traits"></div>
+  </div>
+  <div class="card">
+    <h3>Toxicity checklist</h3>
+    <p class="sub">Check what you have actually seen. 0–1 checked: Low, score stands. 2–3: Medium, final score −25%. 4–7: High, final score cut in half. Beauty does not cancel toxicity — it raises the risk.</p>
+    <div class="checkgrid" id="her-tox"></div>
+    <div class="tox-level" id="her-tox-level"></div>
+  </div>
+  <div class="card">
+    <h3>Deal-breakers</h3>
+    <p class="sub">Any one of these ends it, no matter what the points say. The numbers stay visible — the call is overridden.</p>
+    <div class="checkgrid" id="her-db"></div>
+  </div>
+</section>
+
+<!-- ============ HIM ============ -->
+<section class="panel" id="panel-him" aria-labelledby="tab-him">
+  <div class="card">
+    <h2>Score Yourself — The Whole Man Score</h2>
+    <p class="sub">Same standard, turned around. 20 traits, 100 points, built on what makes a man solid. Be honest — nobody sees this but you, and a fantasy score helps nobody.</p>
+    <label class="flabel" for="him-name">Your name (optional)</label>
+    <input type="text" id="him-name" placeholder="e.g. Marcus" autocomplete="off" />
+    <div class="examplebar">
+      <button type="button" id="ex-man">Load strong example</button>
+      <button type="button" id="him-reset">Reset</button>
+    </div>
+    <div id="him-traits"></div>
+  </div>
+  <div class="card">
+    <h3>Your toxicity checklist</h3>
+    <p class="sub">0–1 checked: Low, score stands. 2–3: Medium, −25%. 4–7: High, cut in half.</p>
+    <div class="checkgrid" id="him-tox"></div>
+    <div class="tox-level" id="him-tox-level"></div>
+  </div>
+  <div class="card">
+    <h3>Deal-breakers — your own column</h3>
+    <p class="sub">The same five. If one is true of you, the verdict is do the work first.</p>
+    <div class="checkgrid" id="him-db"></div>
+  </div>
+</section>
+
+<!-- ============ RESULT (shared) ============ -->
+<section id="result" class="card" aria-live="polite">
+  <h2 id="result-title">Her Result</h2>
+  <div id="result-stamps"></div>
+  <div class="scores">
+    <div class="scorebox"><div class="big" id="score100">0</div><div class="lbl">Final score / 100</div></div>
+    <div class="scorebox"><div class="big" id="score10">0.0</div><div class="lbl">Final score / 10</div></div>
+    <div class="scorebox"><div class="big" id="scoreBase">0</div><div class="lbl">Base score (before toxicity)</div></div>
+  </div>
+  <div class="tier" id="result-tier"></div>
+  <div class="headline" id="result-headline"></div>
+
+  <div class="listenbar no-print" id="listenbar">
+    <div class="lb-title"><span aria-hidden="true">🎙️</span> Listen to the Verdict</div>
+    <div class="btnrow">
+      <button class="btn small" id="btn-listen" type="button">▶ Listen</button>
+      <button class="btn small ghost" id="btn-pause" type="button">Pause</button>
+      <button class="btn small ghost" id="btn-resume" type="button">Resume</button>
+      <button class="btn small ghost" id="btn-stop" type="button">Stop</button>
+    </div>
+    <div class="now" id="now-reading">Press Listen and the whole verdict is read to you — scores, the call, and exactly what to work on.</div>
+  </div>
+
+  <h3>The Verdict</h3>
+  <p class="verdict-p" id="verdict-text"></p>
+  <h3>How this conclusion was reached</h3>
+  <ul class="tight" id="reasoning"></ul>
+  <div id="deep-extra"></div>
+
+  <h3>Balance Wheel — the 7 categories</h3>
+  <div class="wheelwrap">
+    <div id="wheel"></div>
+    <div class="catbars" id="catbars"></div>
+  </div>
+
+  <div id="action-block"></div>
+  <div id="social-update"></div>
+
+  <div class="btnrow no-print">
+    <button class="btn" id="btn-save" type="button">Save profile</button>
+    <button class="btn ghost" id="btn-card" type="button">Create verdict card</button>
+    <button class="btn ghost" id="btn-saved-actions" type="button">Saved Profiles (0)</button>
+  </div>
+  <div id="save-feedback" class="savefb" role="status" aria-live="polite"></div>
+  <p class="mutelist">Printing from your browser prints the blank scorecard sheet.</p>
+  <div id="card-zone" class="hidden">
+    <h3>Your verdict card</h3>
+    <label class="check"><input type="checkbox" id="hide-name" checked /> Hide name on the card</label>
+    <img id="cardImg" alt="Shareable verdict card image — 1080 by 1350 PNG" width="1080" height="1350" />
+    <p class="mutelist">Long-press the card image and tap Download image — that always works</p>
+    <div class="btnrow">
+      <button class="btn small" id="btn-share-card" type="button">Share card</button>
+      <a class="btn small ghost" id="btn-download-card" download="whole-woman-score-card.png">Download PNG</a>
+      <button class="btn small ghost" id="btn-open-card-full" type="button">Open card full-screen</button>
+    </div>
+    <p id="share-feedback" role="status" aria-live="polite"></p>
+  </div>
+  <div id="card-fullscreen" class="hidden" role="dialog" aria-modal="true" aria-label="Verdict card full-screen">
+    <p class="fs-note">Long-press the card image and tap Download image — that always works</p>
+    <img id="cardImgFull" alt="Shareable verdict card image — full-screen" />
+    <div class="btnrow" style="justify-content:center;margin-top:14px"><button class="btn" id="btn-close-card-full" type="button">Close</button></div>
+  </div>
+  <p class="mutelist" id="save-msg" role="status"></p>
+</section>
+
+<!-- ============ SAVED ============ -->
+<section class="panel" id="panel-saved" aria-labelledby="tab-saved">
+  <div class="card" id="saved-profiles-anchor">
+    <h2>Saved Profiles</h2>
+    <p class="sub">Saved on this device only, in your browser. Re-open a profile to keep scoring it — every save adds a dated entry to its history.</p>
+    <h3>Her profiles</h3>
+    <div id="saved-her"></div>
+    <h3>Your profiles (Mirror)</h3>
+    <div id="saved-him"></div>
+  </div>
+  <div class="card">
+    <h2>Compare two of her profiles</h2>
+    <div class="row2">
+      <div><label class="flabel" for="cmp-a">Profile A</label><select id="cmp-a"></select></div>
+      <div><label class="flabel" for="cmp-b">Profile B</label><select id="cmp-b"></select></div>
+    </div>
+    <div class="btnrow"><button class="btn small" id="btn-compare" type="button">Compare</button></div>
+    <div id="compare-out"></div>
+  </div>
+</section>
+
+<!-- ============ MATCH ============ -->
+<section class="panel" id="panel-match" aria-labelledby="tab-match">
+  <div class="card">
+    <h2>Match View</h2>
+    <p class="sub">Put her score next to yours. Two different systems — so this compares totals and weakest areas only, and makes a straight call on the gap.</p>
+    <div class="row2">
+      <div><label class="flabel" for="match-her">Her saved profile</label><select id="match-her"></select></div>
+      <div><label class="flabel" for="match-him">Your saved profile</label><select id="match-him"></select></div>
+    </div>
+    <div class="btnrow"><button class="btn" id="btn-match" type="button">See the match</button></div>
+    <div id="match-out"></div>
+  </div>
+</section>
+
+<!-- ============ PRINT SHEET ============ -->
+<div id="printSheet" aria-hidden="true">
+  <h2>The Whole Woman Score — Blank Scorecard</h2>
+  <p>Name: ______________________ &nbsp; Date: ____________ &nbsp; Known her: ____________</p>
+  <table id="print-table"></table>
+  <p>Toxicity (circle): Low — stands · Medium — minus 25% · High — cut in half. &nbsp; Core cap: Honesty, Loyalty or Accountability at 0–2 caps the final at 49.</p>
+  <p>Base: ______ → Adjustment: ______ → Final: ______ / 100 = ______ / 10 &nbsp; Verdict: ______________________</p>
+  <p>Re-score in 30 / 60 / 90 days. Balance earns the score — looks alone never do.</p>
+</div>
+
+<footer>
+  <p class="brand">The Whole Woman Score — by Tooo Much Moxie</p>
+  <p>Your scores save on this device only. Nothing you enter here is sent anywhere.</p>
+  <p>Not just the look. The whole woman.</p>
+</footer>
+</div>
+
+<script>
+"use strict";
+/* ================= DATA ================= */
+var HER = {
+  mode:"her",
+  cats:[
+    {name:"Character & Trust", traits:[
+      {id:"honesty",name:"Honesty",max:8,low:"Lies, hides, stories change.",mid:"Mostly straight; bends truth under pressure.",top:"Truthful even when it costs her.",find:"Ask about something she could easily hide and watch whether the story stays the same over time."},
+      {id:"loyalty",name:"Loyalty",max:8,low:"Entertains other men; you are an option.",mid:"Loyal when things are easy.",top:"Shuts down outside attention; defends you in rooms you are not in.",find:"See how she handles attention from other men when she thinks you are not watching."},
+      {id:"accountability",name:"Accountability",max:8,low:"Blames everyone; never apologizes.",mid:"Admits fault slowly, after pressure.",top:"Owns it fast, apologizes clean, fixes it.",find:"Bring up one small thing she did wrong and watch: ownership, or deflection?"}
+    ]},
+    {name:"Personality & Heart", traits:[
+      {id:"personality",name:"Personality",max:4,low:"Draining, flat, or always negative.",mid:"Pleasant enough in short doses.",top:"Easy to be around; lifts the room.",find:"Spend a long, ordinary day together — no event, no drinks — and see who she is at hour six."},
+      {id:"caring",name:"Caring",max:4,low:"Cold; your problems bore her.",mid:"Kind when it is convenient.",top:"Checks on you, remembers details, shows up.",find:"Tell her about a real problem once and see if she ever follows up on it."},
+      {id:"understanding",name:"Understanding",max:4,low:"Dismisses your side every time.",mid:"Listens, but makes it about her.",top:"Hears you out and actually gets it.",find:"Disagree with her on something small and see if she can state your side fairly."},
+      {id:"gratitude",name:"Gratitude & Humility",max:4,low:"Entitled; nothing is ever enough.",mid:"Says thanks, expects more.",top:"Genuinely thankful; gives credit; stays humble.",find:"Do something thoughtful and watch whether it is received as a gift or as a minimum."}
+    ]},
+    {name:"Femininity & Partnership", traits:[
+      {id:"femininity",name:"Femininity",max:4,low:"Hard, combative energy by default.",mid:"Soft sometimes, guarded mostly.",top:"Warm, feminine presence that relaxes you.",find:"Watch her in a relaxed setting with people she trusts — that is the real setting."},
+      {id:"leadership",name:"Allows a Man to Lead",max:4,low:"Fights every decision; must control.",mid:"Lets you lead on small things only.",top:"Trusts your direction and adds to it.",find:"Make a plan for a day out and see if she can follow it without a power struggle."},
+      {id:"respect",name:"Respect & Supportiveness",max:4,low:"Belittles you, especially in public.",mid:"Supportive in private, shaky in public.",top:"Backs you publicly and corrects you privately.",find:"Watch how she talks about you — and to you — in front of her friends."},
+      {id:"peace",name:"Peacefulness & Emotional Control",max:4,low:"Explodes or shuts down; chaos follows her.",mid:"Moody; recovers eventually.",top:"Calm under stress; brings peace, not storms.",find:"See her on a bad day — traffic, a bill, a disappointment — before you judge this one."}
+    ]},
+    {name:"Appearance, Health & Hygiene", traits:[
+      {id:"looks",name:"Natural Looks",max:4,low:"Relies entirely on filters and heavy makeup.",mid:"Attractive with effort.",top:"Naturally attractive; looks like herself in person.",find:"See her early morning, no makeup, no filter. That is the honest score."},
+      {id:"inshape",name:"In Shape",max:4,low:"No care for her body or health.",mid:"Inconsistent; starts and stops.",top:"Takes care of her body consistently.",find:"Notice her habits over weeks — food, movement, sleep — not one gym selfie."},
+      {id:"hwprop",name:"Height/Weight Proportion",max:4,low:"Far out of proportion for her height.",mid:"Somewhat out of proportion.",top:"Well proportioned for her height.",find:"This is proportion for her height, not one universal number — judge it in person, over time."},
+      {id:"hygiene",name:"Hygiene",max:4,low:"Body, teeth, hair or clothes neglected.",mid:"Fine for dates, sloppy day to day.",top:"Clean body, grooming, hair, nails, teeth, scent and clothes — daily.",find:"Her car and her bathroom tell the truth faster than a date outfit does."}
+    ]},
+    {name:"Home Life", traits:[
+      {id:"cooking",name:"Cooking",max:5,low:"Cannot or will not cook at all.",mid:"A few basics, reluctantly.",top:"Cooks real meals well and willingly.",find:"Ask her to make something simple at home instead of eating out."},
+      {id:"cleaning",name:"Home Cleaning",max:5,low:"Her space is chaotic and dirty.",mid:"Cleans up only when company comes.",top:"Her space is clean and organized as a habit.",find:"See her place on an unplanned visit, not a scheduled one."},
+      {id:"family",name:"Family Orientation",max:4,low:"No interest in family or building one.",mid:"Likes the idea, not the work.",top:"Values family; acts like it daily.",find:"Watch how she treats her own family and talks about the future."}
+    ]},
+    {name:"Stability & Life Management", traits:[
+      {id:"communication",name:"Communication & Conflict Resolution",max:4,low:"Yells, stonewalls, or goes silent for days.",mid:"Talks, but issues never get solved.",top:"Raises issues calmly and actually resolves them.",find:"Have one real disagreement and see whether it ends resolved or just paused."},
+      {id:"findisc",name:"Financial Discipline",max:4,low:"Debt, impulse spending, money chaos.",mid:"Gets by; no plan.",top:"Lives within her means; handles money like an adult.",find:"Listen to how she talks about money, bills and debt over time — it comes out."},
+      {id:"consistency",name:"Consistency",max:3,low:"Hot and cold; a different person weekly.",mid:"Steady in good seasons.",top:"The same woman on day 90 as day 1.",find:"Only time scores this one. Compare month one to month three."},
+      {id:"values",name:"Values & Faith Alignment",max:3,low:"Values clash with yours at the core.",mid:"Compatible on the surface.",top:"Shared values and faith that guide her choices.",find:"Talk about faith, family and right and wrong early — and watch whether her life matches her words."}
+    ]},
+    {name:"Social Media", traits:[
+      {id:"sm_scroll",name:"Scroll Discipline",max:5,low:"Hours lost daily to doom scrolling; phone in bed, at the table, and mid-conversation.",mid:"Scrolls a lot but can put it down when it matters.",top:"Phone serves her life; little time wasted scrolling, present in person.",find:"Watch a full evening: how much time disappears into the feed, and is the phone in bed, at meals, and mid-conversation?"},
+      {id:"sm_attention",name:"Attention Posting",max:5,low:"Posts thirst traps for attention, counts likes, entertains men's DMs and comments.",mid:"Some attention posting; boundaries inconsistent.",top:"Posts for real life or business, not male attention; shuts down thirsty DMs.",find:"Look at what she posts and why, and what happens in the comments and DMs after she posts."}
+    ]}
+  ],
+  tox:["Drama & chaos","Manipulation","Entitlement","Attention/validation hunger","Disrespect","Constant arguing","Never wrong / can't apologize"],
+  db:["Caught cheating","Caught in a serious lie","Stealing","Physical violence","Hard addiction"],
+  core:["honesty","loyalty","accountability"]
+};
+var HIM = {
+  mode:"him",
+  cats:[
+    {name:"Character & Integrity", traits:[
+      {id:"m_honesty",name:"Honesty",max:7,low:"Lies or hides when it is easier.",mid:"Honest until it costs him.",top:"Truthful even when it costs him.",prove:"Tell the truth once this week when a lie would be easier — and note that you did it."},
+      {id:"m_accountability",name:"Accountability",max:7,low:"Blames people, luck, the system.",mid:"Owns some of it, late.",top:"Owns it first, fixes it, no excuses.",prove:"Name one failure this week out loud to someone and state your part in it, unedited."},
+      {id:"m_word",name:"Keeps His Word",max:6,low:"Promises evaporate.",mid:"Keeps the big ones, drops the small.",top:"If he said it, it happens.",prove:"Make one small promise a day for 30 days and keep every single one."}
+    ]},
+    {name:"Leadership & Direction", traits:[
+      {id:"m_leadership",name:"Leadership & Decision-Making",max:7,low:"Avoids decisions; drifts with the room.",mid:"Decides, then second-guesses.",top:"Decides clearly and stands behind it.",prove:"Take the lead on one real decision this week — plan it, call it, own the result."},
+      {id:"m_purpose",name:"Purpose & Mission",max:7,low:"No mission; days happen to him.",mid:"Goals exist but stay vague.",top:"Clear mission; his week serves it.",prove:"Write your mission in one sentence and put one hour a day against it for 30 days."},
+      {id:"m_initiative",name:"Takes Initiative",max:6,low:"Waits to be told; reacts only.",mid:"Starts things, rarely finishes.",top:"Sees it, starts it, finishes it.",prove:"Fix one thing this week without being asked — home, work, or money."}
+    ]},
+    {name:"Provision & Money", traits:[
+      {id:"m_workethic",name:"Provider Work Ethic",max:7,low:"Avoids work; always an excuse.",mid:"Works when pushed.",top:"Relentless, consistent effort to provide.",prove:"Thirty straight days of showing up early to the work that pays — no zero days."},
+      {id:"m_findisc",name:"Financial Discipline",max:6,low:"Debt and impulse rule him.",mid:"Pays bills; nothing saved.",top:"Budget, savings, no money chaos.",prove:"Track every dollar for 30 days and cut one leak completely."},
+      {id:"m_resourceful",name:"Resourcefulness & Problem-Solving",max:5,low:"Problems stop him cold.",mid:"Solves the easy ones.",top:"Finds a way; problems become plans.",prove:"Take one problem you have been avoiding and produce two workable options this week."}
+    ]},
+    {name:"Strength, Body & Protection", traits:[
+      {id:"m_inshape",name:"In Shape & Physical Capability",max:6,low:"Body neglected; capability fading.",mid:"Starts and stops.",top:"Trained, capable, consistent.",prove:"Train four days a week for 30 days. No negotiation."},
+      {id:"m_protector",name:"Protector Mindset & Capability",max:5,low:"Freezes or looks away.",mid:"Willing, unprepared.",top:"Alert, capable, calm under threat.",prove:"Learn one real protective skill this month — first aid, self-defense, home safety."},
+      {id:"m_emotional",name:"Emotional Control Under Pressure",max:5,low:"Anger or panic drives him.",mid:"Holds it, then leaks it later.",top:"Steady under pressure; pressure sharpens him.",prove:"For 30 days: no raised voice, no slammed doors. Pause, breathe, answer."}
+    ]},
+    {name:"Discipline & Order", traits:[
+      {id:"m_discipline",name:"Daily Discipline & Consistency",max:5,low:"Runs on motivation only.",mid:"Good weeks, lost weeks.",top:"Same standard every day, mood or not.",prove:"One non-negotiable morning routine, 30 days straight."},
+      {id:"m_order",name:"Keeps His House & Life in Order",max:5,low:"His space and life are chaos.",mid:"Cleans up for company.",top:"His home and affairs are in order as a habit.",prove:"Put your home fully in order this week, then hold a 15-minute daily reset."},
+      {id:"m_hygiene",name:"Hygiene, Grooming & Presentation",max:4,low:"Neglected; it shows.",mid:"Fine on occasion.",top:"Clean, groomed, presents like he respects himself.",prove:"Set a grooming standard — hair, nails, teeth, clothes — and hold it daily for 30 days."}
+    ]},
+    {name:"Heart, Faith & Relationships", traits:[
+      {id:"m_communication",name:"Communication",max:4,low:"Silent, explosive, or dishonest talks.",mid:"Talks, avoids the hard topics.",top:"Direct, calm, honest — even when hard.",prove:"Have one hard conversation this week calmly instead of avoiding it."},
+      {id:"m_caring",name:"Caring & Understanding",max:4,low:"Cold; only his world matters.",mid:"Cares, rarely shows it.",top:"Attentive; people feel heard around him.",prove:"Once a day for 30 days, ask someone a real question and listen without fixing or judging."},
+      {id:"m_values",name:"Values & Faith Alignment",max:4,low:"No anchor; shifts with the crowd.",mid:"Believes, but it does not guide him.",top:"Values and faith visibly steer his choices.",prove:"Name your three core values and audit one decision a day against them for 30 days."}
+    ]},
+    {name:"Social Media", traits:[
+      {id:"m_sm_scroll",name:"Scroll Discipline",max:5,low:"Hours lost daily to doom scrolling; phone in bed, at meals, and mid-conversation.",mid:"Scrolls too much but can put it down when it matters.",top:"Phone is a tool, not a master; little wasted scroll time, present in person.",prove:"Cap recreational scrolling at 30 minutes a day for 30 days and keep the phone out of bed and off the table at meals."},
+      {id:"m_sm_lust",name:"Business or Lust",max:5,low:"Social media is for liking every fine woman's picture, following thirst accounts, and sliding into DMs.",mid:"Mixed use — some business, plenty of wandering eyes.",top:"Uses social media for business, networking and building; does not feed lust online.",prove:"Unfollow every thirst account today, stop liking women's photos for 30 days, and post or network for business daily instead."}
+    ]}
+  ],
+  tox:["Uncontrolled anger","Chronic laziness / no drive","Victim mindset","Can't control his lust / wandering eye","Reckless money & debt","Substance abuse","Avoids responsibility / hard conversations"],
+  db:["Caught cheating","Caught in a serious lie","Stealing","Physical violence","Hard addiction"],
+  core:["m_honesty","m_accountability","m_word"]
+};
+var IMPROVE = {
+  m_honesty:{d:"Tell the whole truth in small things first — where you were, what it cost, why you were late. Honesty is built in low-stakes reps.",p:"30 days: zero white lies. If you catch one, correct it the same day, out loud.",pay:"Your word starts carrying weight — and a quality woman trusts a man whose story never changes."},
+  m_accountability:{d:"When something goes wrong, state your part first, before any context. No 'but'. Then state the fix and the date it is done.",p:"30 days: keep a nightly one-line log — 'Today I owned: ___'.",pay:"You stop sounding like a boy explaining and start sounding like a man in charge of his life."},
+  m_word:{d:"Shrink your promises and enlarge your follow-through. Only promise what is already on your calendar.",p:"30 days: one small promise a day, kept 100 percent. Track the streak where you can see it.",pay:"Keeps His Word is the trait women test first. Pass it and half her guard comes down."},
+  m_leadership:{d:"Make decisions at the speed of the situation: gather the facts, decide, communicate it plainly, own the outcome.",p:"30 days: lead one plan a week end-to-end — dinner, project, family matter — no polling the room.",pay:"Direction is attractive. A decisive man can lead a household; a drifter can only join one."},
+  m_purpose:{d:"Write the mission in one sentence. Cut one activity that does not serve it. Give the mission the first hour of the day.",p:"30 days: one focused hour daily on the mission before your phone gets an hour of you.",pay:"A man on a mission is the rarest thing in the room — and the kind a balanced woman builds with."},
+  m_initiative:{d:"Stop waiting for perfect information. See the problem, move first, adjust as you go.",p:"30 days: one unprompted fix per day — a repair, a call, a bill, a hard task started.",pay:"Initiative separates leaders from commentators. Your score and your life both move."},
+  m_workethic:{d:"Treat providing as identity, not mood. Set work hours and keep them like an appointment with your future family.",p:"30 days: no zero days. Even a rest day gets one income-building action.",pay:"Provision is proof of love a woman can see. It raises what you can offer and what you can require."},
+  m_findisc:{d:"Budget in writing. Kill one debt or one leak this month. Save before you spend, automatically.",p:"30 days: track every dollar daily; no unplanned purchase over a set amount.",pay:"Money chaos repels stability. Discipline here buys peace in every other category."},
+  m_resourceful:{d:"For every problem, force two options before you complain about either. Resourceful men list paths, not obstacles.",p:"30 days: one avoided problem per week gets two written options and a chosen path.",pay:"A man who solves problems becomes the calm center of a home instead of another problem in it."},
+  m_inshape:{d:"Train like it is a duty, not a hobby. Strength, wind, mobility — build all three.",p:"30 days: four training sessions a week, logged. Miss one, make it up within 48 hours.",pay:"Your body is your first résumé. Capability earns respect before you say a word."},
+  m_protector:{d:"Get capable: situational awareness, a real skill, a home that is ready. Protection is preparation, not attitude.",p:"30 days: learn one skill (first aid or self-defense basics) and fix one safety gap at home.",pay:"A woman relaxes next to a man she believes can handle the worst day, not just the good ones."},
+  m_emotional:{d:"Build a pause: feel it, name it silently, answer at half volume. Anger expressed is not strength — anger governed is.",p:"30 days: no raised voice, no door slams, no silent-treatment days. Log every near-miss.",pay:"Emotional control is the difference between a protector and a threat. It decides what kind of home you create."},
+  m_discipline:{d:"Same wake time, same first hour, every day. Discipline is a schedule, not a feeling.",p:"30 days: fixed wake time and a written morning routine, checked off daily.",pay:"Consistency is how trust is built — in yourself first, then by everyone watching you."},
+  m_order:{d:"A man's space is his mind made visible. Everything gets a place; the day ends with a reset.",p:"30 days: full order in week one, then a 15-minute nightly reset to hold it.",pay:"Order at home signals a man who can hold a family together. Chaos signals the opposite."},
+  m_hygiene:{d:"Set the standard: daily shower, teeth twice, nails trimmed, hair kept, clean clothes that fit.",p:"30 days: a fixed morning and night grooming routine, no skipped days.",pay:"Presentation is self-respect made visible. It changes how rooms — and women — receive you."},
+  m_communication:{d:"Say the hard thing early, calmly, and completely. Silence and explosions are both failures of the same muscle.",p:"30 days: one honest, calm conversation a week about something you would normally avoid.",pay:"A man who can talk without breaking things can fix almost anything a relationship hits."},
+  m_caring:{d:"Listen to understand, not to answer. Remember what people tell you and follow up on it.",p:"30 days: one real question a day, listened to fully, with a follow-up the next day.",pay:"Heart is what separates a provider from a partner. Without it, everything you build feels cold."},
+  m_sm_scroll:{d:"Put the phone on a leash: app timers, no phone in bed or at meals, and a hard daily cap on recreational scrolling. Doom scrolling is discipline leaking out of a screen.",p:"30 days: 30-minute daily cap on social scrolling, phone charges outside the bedroom, and no phone at meals or mid-conversation.",pay:"You get hours of your life back every week — time a driven man puts into purpose, business and presence — and people feel the difference when your eyes are actually on them."},
+  m_sm_lust:{d:"Audit every account you follow and every like you give. Unfollow thirst accounts, stop liking women's photos, and turn the same minutes into posting, networking and building for business.",p:"30 days: unfollow all thirst accounts on day one, zero likes on women's pictures, zero DMs that are not business, and one business post or outreach a day.",pay:"Your feed stops working against your discipline and starts working for your income — and a quality woman can see a man whose eyes and attention are governed, not for sale to every photo."},
+  m_values:{d:"Write your values down. Then audit your week against them — where your calendar and money went is what you actually believe.",p:"30 days: one decision a day checked against your stated values before you make it.",pay:"An anchored man cannot be bought, flattered or dragged off course — and that steadiness is rare and magnetic."}
+};
+</script>
+<script>
+"use strict";
+/* ================= STATE ================= */
+var LS_KEY = "wws-public-profiles-v1";
+function blankState(cfg){ var s={values:{},unobs:{},notes:{},tox:{},db:{},unscored:{}}; cfg.cats.forEach(function(c){c.traits.forEach(function(t){s.values[t.id]=0; if(c.name==="Social Media") s.unscored[t.id]=true;});}); return s; }
+var SOCIAL_IDS={her:["sm_scroll","sm_attention"],him:["m_sm_scroll","m_sm_lust"]};
+window.__socialJustUpdated={her:false,him:false};
+var state = { her: blankState(HER), him: blankState(HIM) };
+var activeMode = "her";
+var currentProfileId = { her:null, him:null };
+var lastResult = { her:null, him:null };
+var lastCardBlob = null;
+
+function cfg(mode){ return mode==="her"?HER:HIM; }
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+function allTraits(c){ var a=[]; c.cats.forEach(function(cat){cat.traits.forEach(function(t){a.push({t:t,cat:cat});});}); return a; }
+function traitById(c,id){ var f=null; allTraits(c).forEach(function(x){ if(x.t.id===id) f=x; }); return f; }
+
+/* ================= BUILD FORMS ================= */
+function buildTraits(mode){
+  var c=cfg(mode), host=$(mode+"-traits"); host.innerHTML="";
+  c.cats.forEach(function(cat){
+    var head=document.createElement("div"); head.className="cat";
+    var total=cat.traits.reduce(function(s,t){return s+t.max;},0);
+    head.innerHTML="<h3>"+esc(cat.name)+"</h3><span class='pts'>"+total+" POINTS</span>";
+    host.appendChild(head);
+    cat.traits.forEach(function(t){
+      var div=document.createElement("div"); div.className="trait";
+      div.innerHTML =
+        "<div class='trait-head'><span class='trait-name'>"+esc(t.name)+"</span><span><span class='trait-max'>0–"+t.max+"</span> <span class='trait-val' id='val-"+t.id+"'>0</span></span></div>"+
+        "<input type='range' min='0' max='"+t.max+"' step='1' value='0' id='rng-"+t.id+"' aria-label='"+esc(t.name)+"' />"+
+        "<div class='anchor' id='anc-"+t.id+"'></div>"+
+        "<div class='trait-tools'><label class='check'><input type='checkbox' id='unobs-"+t.id+"' /> "+(mode==="her"?"Not observed yet":"Not proven yet")+"</label></div>"+
+        "<details class='note-wrap'><summary>Evidence note — what you actually saw</summary><textarea id='note-"+t.id+"' placeholder='One honest line of evidence…'></textarea></details>";
+      host.appendChild(div);
+      $("rng-"+t.id).addEventListener("input",function(e){ state[mode].values[t.id]=parseInt(e.target.value,10)||0; if(state[mode].unscored) state[mode].unscored[t.id]=false; if(currentProfileId[mode] && SOCIAL_IDS[mode].indexOf(t.id)>=0) window.__socialJustUpdated[mode]=true; stopSpeech(); render(mode); });
+      $("unobs-"+t.id).addEventListener("change",function(e){ state[mode].unobs[t.id]=e.target.checked; stopSpeech(); render(mode); });
+      $("note-"+t.id).addEventListener("input",function(e){ state[mode].notes[t.id]=e.target.value; });
+    });
+  });
+}
+function buildChecks(mode){
+  var c=cfg(mode);
+  var th=$(mode+"-tox"); th.innerHTML="";
+  c.tox.forEach(function(label,i){
+    var l=document.createElement("label"); l.className="check";
+    l.innerHTML="<input type='checkbox' data-tox='"+i+"' /> "+esc(label);
+    l.querySelector("input").addEventListener("change",function(e){ state[mode].tox[i]=e.target.checked; stopSpeech(); render(mode); });
+    th.appendChild(l);
+  });
+  var dh=$(mode+"-db"); dh.innerHTML="";
+  c.db.forEach(function(label,i){
+    var l=document.createElement("label"); l.className="check";
+    l.innerHTML="<input type='checkbox' data-db='"+i+"' /> "+esc(label);
+    l.querySelector("input").addEventListener("change",function(e){ state[mode].db[i]=e.target.checked; stopSpeech(); render(mode); });
+    dh.appendChild(l);
+  });
+}
+function anchorFor(t,val){
+  var pct = t.max? val/t.max : 0;
+  if(pct<=0.34) return "<b>Low:</b> "+esc(t.low);
+  if(pct<=0.74) return "<b>Middle:</b> "+esc(t.mid);
+  return "<b>Top:</b> "+esc(t.top);
+}
+
+/* ================= SCORING ================= */
+function compute(mode){
+  var c=cfg(mode), s=state[mode];
+  var observed=allTraits(c).filter(function(x){return !s.unobs[x.t.id] && !(s.unscored && s.unscored[x.t.id]);});
+  var obsMax=observed.reduce(function(sum,x){return sum+x.t.max;},0);
+  var raw=observed.reduce(function(sum,x){return sum+(s.values[x.t.id]||0);},0);
+  var base = obsMax? Math.round(raw/obsMax*100) : 0;
+  var toxCount=c.tox.filter(function(_,i){return s.tox[i];}).length;
+  var toxLevel = toxCount<=1?"Low":(toxCount<=3?"Medium":"High");
+  var afterTox = base;
+  if(toxLevel==="Medium") afterTox=Math.round(base*0.75);
+  if(toxLevel==="High") afterTox=Math.round(base/2);
+  var capTrait=null;
+  c.core.forEach(function(id){ if(!s.unobs[id] && (s.values[id]||0)<=2 && !capTrait) capTrait=traitById(c,id); });
+  var final=afterTox, capped=false;
+  if(capTrait && afterTox>49){ final=49; capped=true; }
+  var capCondition=!!capTrait;
+  var dbList=c.db.filter(function(_,i){return s.db[i];});
+  var catPcts=c.cats.map(function(cat){
+    var obs=cat.traits.filter(function(t){return !s.unobs[t.id] && !(s.unscored && s.unscored[t.id]);});
+    var m=obs.reduce(function(a,t){return a+t.max;},0), v=obs.reduce(function(a,t){return a+(s.values[t.id]||0);},0);
+    return {name:cat.name, pct: m? Math.round(v/m*100):null};
+  });
+  var scored=observed.map(function(x){return {t:x.t,cat:x.cat,val:s.values[x.t.id]||0,pct:Math.round((s.values[x.t.id]||0)/x.t.max*100)};});
+  var sorted=scored.slice().sort(function(a,b){return b.pct-a.pct || b.val-a.val;});
+  var strongest=sorted[0], weakest=sorted[sorted.length-1];
+  var greens=scored.filter(function(x){return x.pct>=75;});
+  var reds=scored.filter(function(x){return x.pct<=25;});
+  var watchPool=scored.filter(function(x){return x.pct>25 && x.pct<75;}).sort(function(a,b){return a.pct-b.pct;});
+  var unobsList=allTraits(c).filter(function(x){return s.unobs[x.t.id];});
+  if(watchPool.length<3){ scored.slice().sort(function(a,b){return a.pct-b.pct;}).forEach(function(x){ if(watchPool.length<3 && watchPool.indexOf(x)<0) watchPool.push(x); }); }
+  var watch=watchPool.slice(0,3);
+  var unscoredList=allTraits(c).filter(function(x){return s.unscored && s.unscored[x.t.id];});
+  var provisional = unobsList.length>0 || unscoredList.length>0;
+  var fantasy=false, fantasyWhy="";
+  if(mode==="her"){
+    var known=$("her-known").value;
+    if(base>=85 && (known==="lt2w"||known==="2-4w")){ fantasy=true; provisional=true; fantasyWhy="Fantasy Check: a base score of "+base+" inside the first month is unproven — high traits scored this early are hope, not evidence. These are fantasy scores until time tests them."; }
+  } else {
+    var noteCount=Object.keys(s.notes).filter(function(k){return (s.notes[k]||"").trim().length>0;}).length;
+    if(base>=85 && noteCount===0){ fantasy=true; provisional=true; fantasyWhy="Fantasy Check: a base score of "+base+" with zero evidence notes is scored on hope, not proof. Back the numbers with evidence or lower them."; }
+  }
+  return {mode:mode,base:base,raw:raw,obsMax:obsMax,final:final,afterTox:afterTox,toxCount:toxCount,toxLevel:toxLevel,
+    toxChecked:c.tox.filter(function(_,i){return s.tox[i];}), capped:capped, capCondition:capCondition, capTrait:capTrait, dbList:dbList,
+    catPcts:catPcts, strongest:strongest, weakest:weakest, greens:greens, reds:reds, watch:watch,
+    unobsList:unobsList, unscoredList:unscoredList, provisional:provisional, fantasy:fantasy, fantasyWhy:fantasyWhy,
+    observedCount:observed.length, totalTraits:allTraits(c).length, scored:scored};
+}
+function bandFor(mode,final,dbList){
+  if(dbList.length) return mode==="her"
+    ? {tier:"Deal-Breaker Override", headline:"LEAVE HER — a deal-breaker ends it, whatever the points say."}
+    : {tier:"Deal-Breaker Override", headline:"DO THE WORK FIRST — a deal-breaker in your own column disqualifies you from demanding her standard."};
+  if(mode==="her"){
+    if(final>=90) return {tier:"Balanced Elite", headline:"Build a future with her."};
+    if(final>=80) return {tier:"Worth Investing In", headline:"Worth investing in — with a named watch area."};
+    if(final>=70) return {tier:"Proceed Slowly", headline:"Proceed slowly — she is not proven yet."};
+    if(final>=50) return {tier:"Not a Good Candidate", headline:"Not a good candidate for a serious future."};
+    return {tier:"Unbalanced / Toxic", headline:"LEAVE HER."};
+  }
+  if(final>=90) return {tier:"Operating at the Standard", headline:"Operating at the standard."};
+  if(final>=80) return {tier:"Strong, With a Gap", headline:"Strong — now close the gap."};
+  if(final>=70) return {tier:"Solid Base, Real Gaps", headline:"Solid base, real gaps."};
+  if(final>=50) return {tier:"Not Yet", headline:"Not yet the man your standard requires."};
+  return {tier:"Fix Yourself First", headline:"FIX YOURSELF FIRST."};
+}
+function verdictText(r){
+  var s=r.strongest, w=r.weakest;
+  if(r.mode==="her"){
+    var name=($("her-name").value||"She").trim()||"She";
+    if(r.dbList.length) return name+" scored "+r.final+" out of 100 — and it does not matter. "+r.dbList.join(", ")+" is not a flaw to average out with good cooking and a pretty face; it is a character verdict all by itself. Her strongest area is "+s.t.name+" at "+s.val+" of "+s.t.max+", and none of it buys back a deal-breaker. A man who stays after this teaches her exactly what he will tolerate. Leave, and do not negotiate with the score.";
+    if(r.final>=90) return "This is what balance looks like. "+name+" is not being carried by her face — her strongest trait is "+s.t.name+" ("+s.val+"/"+s.t.max+") and even her weakest, "+w.t.name+" ("+w.val+"/"+w.t.max+"), is respectable. Character, heart, femininity, home life and stability are all pulling in the same direction, which is exactly what a future is built on. Women like this are rare because balance is rare. Invest in her, lead well, and do not fumble a balanced woman by grading her like she is replaceable.";
+    if(r.final>=80) return name+" is worth investing in. Her foundation is real — "+s.t.name+" leads at "+s.val+" of "+s.t.max+" — and the whole picture holds together. The watch area is "+w.t.name+" at "+w.val+" of "+w.t.max+": not a reason to walk, but a reason to keep your eyes open while you invest. Move forward, name what you see, and re-score her in 30 days to confirm she is who these numbers say she is.";
+    if(r.final>=70) return name+" shows enough to keep watching and not enough to commit. Her best, "+s.t.name+" ("+s.val+"/"+s.t.max+"), is genuine, but "+w.t.name+" at "+w.val+" of "+w.t.max+" is the kind of gap that grows teeth later. Proceed slowly: more time, more situations, more evidence. Do not promote her to a future on potential — make her prove it across seasons, not weekends.";
+    if(r.final>=50) return "Be honest with yourself: "+name+" is not a good candidate for a serious future. Whatever she has in "+s.t.name+", it is outweighed by "+w.t.name+" at "+w.val+" of "+w.t.max+" and the overall imbalance behind it. This profile is how men end up years deep in something they saw clearly in month two. You can enjoy the lesson now, cheap, or pay for it later. Do not invest what you already know you will regret.";
+    return "LEAVE HER. The numbers are not close and neither is the call. Her weakest trait, "+w.t.name+" ("+w.val+"/"+w.t.max+"), is not an off day — at this level it is a pattern, and the total says the pattern runs through the whole picture. Staying does not make you loyal; it makes you the man who saw the evidence and chose the feeling anyway. Walk away clean and let the score mean something.";
+  }
+  /* HIM deep paragraph */
+  var cp={}; r.catPcts.forEach(function(x){cp[x.name]=x.pct;});
+  var parts=[];
+  parts.push("Your final is "+r.final+" out of 100, and the pattern matters more than the number.");
+  if(r.dbList.length) parts.push("Start here: "+r.dbList.join(", ")+" sits in your own column. Until that is dead and buried, every other point on this page is decoration — you cannot demand a standard you are actively violating.");
+  parts.push("Your strongest trait is "+s.t.name+" at "+s.val+" of "+s.t.max+", and your weakest is "+w.t.name+" at "+w.val+" of "+w.t.max+" — that gap is the story of your score.");
+  var lead=cp["Leadership & Direction"], word=r.scored.filter(function(x){return x.t.id==="m_word";})[0];
+  if(lead!=null && lead>=70 && word && word.pct<=40) parts.push("And name the contradiction plainly: you scored your Leadership at "+lead+" percent while Keeps His Word sits at "+word.pct+" percent. That is not leadership — a man whose word does not hold is not leading, he is performing. People follow the man whose promises survive contact with a hard week.");
+  var charP=cp["Character & Integrity"], prov=cp["Provision & Money"], heart=cp["Heart, Faith & Relationships"];
+  if(charP!=null && charP<50) parts.push("Character & Integrity at "+charP+" percent is the foundation cracking: every other category is built on it, and a woman with options can smell a weak foundation in one conversation.");
+  if(prov!=null && prov>=70 && heart!=null && heart<50) parts.push("You can provide — Provision is at "+prov+" percent — but Heart sits at "+heart+" percent, which means what you build will feel like a job to the woman inside it, not a home.");
+  if(r.toxLevel==="High") parts.push("Your toxicity load cut this score in half, and it should: "+r.toxChecked.join(", ").toLowerCase()+" will burn down anything the good traits build.");
+  else if(r.toxLevel==="Medium") parts.push("Toxicity took 25 percent off the top: "+r.toxChecked.join(", ").toLowerCase()+" — those are not quirks, they are leaks in the hull.");
+  if(r.final>=90 && !r.dbList.length) parts.push("The categories hold together — no single area is carrying or sinking you. That is what operating at the standard actually looks like: not perfection, balance with receipts.");
+  else if(r.final<50 && !r.dbList.length) parts.push("Do not go shopping for a high-value woman with this scorecard. Fix the foundation first — the work below is written in the order your own numbers demand.");
+  else if(!r.dbList.length) parts.push("The honest read: you have real strengths to build on and specific, fixable gaps. The gap between this score and the standard you would grade her by is the only number that should bother you — close it.");
+  return parts.join(" ");
+}
+function archetype(r){
+  var cp={}; r.catPcts.forEach(function(x){cp[x.name]=x.pct;});
+  var anger = state.him.tox[0];
+  var emo = r.scored.filter(function(x){return x.t.id==="m_emotional";})[0];
+  var word = r.scored.filter(function(x){return x.t.id==="m_word";})[0];
+  var hon = r.scored.filter(function(x){return x.t.id==="m_honesty";})[0];
+  var allHigh = r.catPcts.every(function(x){return x.pct==null||x.pct>=70;});
+  var heart=cp["Heart, Faith & Relationships"], prov=cp["Provision & Money"], lead=cp["Leadership & Direction"],
+      str=cp["Strength, Body & Protection"], chr=cp["Character & Integrity"], disc=cp["Discipline & Order"];
+  function mk(name,text,exp,ceiling){ return {name:name,text:text,exp:exp,ceiling:ceiling}; }
+  if(r.toxLevel==="High" || anger || (emo && emo.val===0))
+    return mk("Out of Control","Toxicity is running this scorecard — "+r.toxChecked.join(", ").toLowerCase()+" — and a final of "+r.final+" after the cut is the math telling the truth. Strength, money and good intentions do not survive a man who cannot govern himself; whatever he builds, his worst day eventually visits it.","A woman experiences him as weather: fine until he is not, and she learns to manage his moods instead of respecting his leadership.","Ceiling if unfixed: no balanced woman stays. The only relationships available to an out-of-control man are with women who need the chaos or cannot leave it.");
+  if(allHigh && r.final>=85)
+    return mk("The Complete Man","Every category at 70 percent or better with a final of "+r.final+" — Character "+chr+" percent, Leadership "+lead+" percent, Provision "+prov+" percent, Heart "+heart+" percent. This is balance with receipts: the word holds, the direction is clear, the body and the house are in order, and there is a heart in the house.","A woman experiences safety and standards at the same time — led, provided for, and actually known.","Ceiling if the weak area slips: completeness is maintained, never owned. Let one category rot and you become a lopsided man with a good memory.");
+  if(heart!=null && heart>=60 && ((word&&word.pct<=40)||(hon&&hon.pct<=40)))
+    return mk("The Charmer","Heart and communication carry him — Heart at "+heart+" percent — while the word underneath sits at "+(word?word.pct:0)+" percent. He says the right things beautifully; the follow-through is where the truth lives, and it is not matching the talk.","A woman experiences intensity first and inconsistency later. She falls for the conversation and then starts keeping receipts.","Ceiling if unfixed: he can attract almost anyone and keep almost no one worth keeping. Charm rents attention; only character buys trust.");
+  if(str!=null && str>=70 && ((chr!=null&&chr<50)||(prov!=null&&prov<50)))
+    return mk("Strong Body, Weak Foundation","Strength, Body & Protection at "+str+" percent is real — but Character at "+(chr==null?"—":chr)+" percent and Provision at "+(prov==null?"—":prov)+" percent cannot hold what the body advertises. He looks like the answer and is not yet built like one.","A woman experiences presence without security: impressive in the room, unreliable across a year.","Ceiling if unfixed: he gets chosen for the picture and replaced for the life. Foundation work is the only way the strength starts to count.");
+  if(chr!=null && chr>=60 && heart!=null && heart>=60 && ((lead!=null&&lead<50)||(prov!=null&&prov<50)))
+    return mk("Good Heart, No Direction","Character at "+chr+" percent and Heart at "+heart+" percent — a genuinely good man. But Leadership at "+(lead==null?"—":lead)+" percent and Provision at "+(prov==null?"—":prov)+" percent mean the goodness has no vehicle. Good intentions without direction become a lifetime of almost.","A woman experiences kindness she respects as a person and cannot follow as a partner. She becomes the planner, then the resentful one.","Ceiling if unfixed: he will watch less-good men with direction build the life he deserved. Direction is a skill — which means it can be built, starting with the work below.");
+  if(prov!=null && prov>=65 && lead!=null && lead>=65 && heart!=null && heart<50)
+    return mk("The Provider Without a Heart","Provision at "+prov+" percent and Leadership at "+lead+" percent — he can build and run things. Heart at "+heart+" percent is the empty room in the house he built: communication and caring are running on fumes while the machine performs.","A woman experiences being provided for and being lonely at the same time — the bills are paid and the man is absent.","Ceiling if unfixed: he keeps women who want the lifestyle, not the man, and loses any woman who needed both.");
+  if(disc!=null && disc>=65 && prov!=null && prov>=65 && heart!=null && heart<60)
+    return mk("The Machine","Discipline at "+disc+" percent and Provision at "+prov+" percent: relentless, ordered, effective — and Heart at "+heart+" percent says the people closest to him get the schedule, not the man. Machines do not burn out dramatically; they just go cold.","A woman experiences reliability without warmth — respected, provided for, and quietly starved for connection.","Ceiling if unfixed: a perfectly run, empty house. The machine keeps everything except the people it was built for.");
+  if(lead!=null && lead<50 && prov!=null && prov<50 && disc!=null && disc<50)
+    return mk("The Drifter","Leadership "+lead+" percent, Provision "+prov+" percent, Discipline "+disc+" percent — all three engines are off. This is not a bad man; it is an unlaunched one. Days happen to him, and everyone in his life can feel the drift.","A woman experiences having to become the man in the relationship — the planner, the driver, the standard — until respect dies of it.","Ceiling if unfixed: drift is a decision made daily. Five years of it looks exactly like this score, only older.");
+  return mk("The Man in Progress","A final of "+r.final+" with no single catastrophic area — Character "+(chr==null?"—":chr)+" percent, Leadership "+(lead==null?"—":lead)+" percent, Provision "+(prov==null?"—":prov)+" percent. The foundation exists; the levels are uneven. This is the most fixable profile on the page: nothing here requires a new personality, only sustained work in the named gaps.","A woman experiences a man visibly becoming — attractive, if the trajectory is real and keeps moving.","Ceiling if the work stalls: 'in progress' has an expiration date. Progress that stops becomes a story he tells about himself.");
+}
+function reasoningList(r){
+  var items=[];
+  if(r.dbList.length) items.push("<b>Deal-breaker override:</b> "+esc(r.dbList.join(", "))+" — checked. The verdict is forced regardless of points; the numbers below stay visible for honesty, but they no longer decide.");
+  items.push("<b>Base score:</b> "+r.raw+" of "+r.obsMax+" observed points = <b>"+r.base+"</b>"+(r.provisional&&r.unobsList.length?" (rescaled over observed traits only)":"")+".");
+  if(r.toxLevel==="Low") items.push("<b>Toxicity: Low</b> ("+r.toxCount+" checked) — the score stands at "+r.afterTox+".");
+  if(r.toxLevel==="Medium") items.push("<b>Toxicity: Medium</b> — "+esc(r.toxChecked.join(", "))+" ("+r.toxCount+" behaviors) cut the score by 25%: "+r.base+" → "+r.afterTox+".");
+  if(r.toxLevel==="High") items.push("<b>Toxicity: High</b> — "+esc(r.toxChecked.join(", "))+" ("+r.toxCount+" behaviors) cut the score in half: "+r.base+" → "+r.afterTox+". This is the system's core rule: the better the package, the more damage unchecked toxicity does.");
+  if(r.capped) items.push("<b>Hard cap fired:</b> "+esc(r.capTrait.t.name)+" is at "+state[r.mode].values[r.capTrait.t.id]+" (0–2), so the final is capped at <b>49</b> no matter what the rest says. A core trait that low cannot be averaged away.");
+  else if(r.capCondition) items.push("<b>Hard cap:</b> the cap condition is met — "+esc(r.capTrait.t.name)+" is at "+state[r.mode].values[r.capTrait.t.id]+" (0–2) — but the score is already at or below 49, so the cap changes nothing. A core trait that low cannot be averaged away.");
+  else items.push("<b>Hard cap:</b> not triggered — no core trait ("+cfg(r.mode).core.map(function(id){return traitById(cfg(r.mode),id).t.name;}).join(", ")+") is at 0–2.");
+  var sp=r.catPcts.map(function(x){return x.pct;}).filter(function(x){return x!=null;});
+  var spread=Math.max.apply(null,sp)-Math.min.apply(null,sp);
+  var allZero = r.scored.every(function(x){return x.val===0;});
+  if(allZero) items.push("<b>Balance check:</b> nothing is scored yet — every trait is at zero, so there is no strongest area and no balance to judge. Move the sliders to score for real.");
+  else items.push("<b>Balance check:</b> strongest trait "+esc(r.strongest.t.name)+" ("+r.strongest.val+"/"+r.strongest.t.max+"), weakest "+esc(r.weakest.t.name)+" ("+r.weakest.val+"/"+r.weakest.t.max+"). Category spread is "+spread+" points — "+(spread<=25?"tight and balanced; no area is carrying or sinking the whole score.":(spread<=45?"noticeably uneven; one area is doing work the others are not.":"lopsided. This is a profile carried by its best area and exposed by its worst.")));
+  if(r.mode==="her"){
+    var looksCat=r.catPcts[3];
+    if(looksCat && looksCat.pct>=75 && r.catPcts[0].pct!=null && r.catPcts[0].pct<50) items.push("<b>Looks-carried warning:</b> Appearance is at "+looksCat.pct+"% while Character &amp; Trust is at "+r.catPcts[0].pct+"%. Her face is carrying a hollow character score — the exact profile this system was built to catch.");
+  }
+  if(r.fantasy) items.push("<b>"+esc(r.fantasyWhy)+"</b>");
+  if(r.unobsList.length) items.push("<b>Provisional:</b> scored on "+r.observedCount+" of "+r.totalTraits+" traits. Not yet observed/proven: "+esc(r.unobsList.map(function(x){return x.t.name;}).join(", "))+".");
+  var evNotes=[]; Object.keys(state[r.mode].notes).forEach(function(k){ var v=(state[r.mode].notes[k]||"").trim(); if(v){ var tb=traitById(cfg(r.mode),k); if(tb) evNotes.push(tb.t.name+": “"+v+"”"); } });
+  if(r.unscoredList && r.unscoredList.length) items.push("<b>Social Media — not scored yet:</b> Social Media is excluded from the math — not counted as zero — until it is scored. Profiles saved before this category existed keep their original score until Social Media is scored in the update panel.");
+  (function(){ var smA=r.scored.filter(function(x){return x.t.id==="sm_attention";})[0]; if(smA && smA.pct<=25) items.push("<b>Social Media overlap named:</b> Attention Posting is at "+smA.pct+"% — that pattern overlaps the toxicity behavior Attention/validation hunger. It is named here for honesty, but it is NOT double-counted in the toxicity math; the category stays separate and toxicity is unchanged."); var smB=r.scored.filter(function(x){return x.t.id==="m_sm_lust";})[0]; if(smB && smB.pct<=25) items.push("<b>Social Media overlap named:</b> Business or Lust is at "+smB.pct+"% — that pattern overlaps the toxicity pattern Can't control his lust / wandering eye. It is named here for honesty, but it is NOT double-counted in the toxicity math; the category stays separate and toxicity is unchanged."); })();
+  if(evNotes.length) items.push("<b>Evidence on record:</b> "+esc(evNotes.slice(0,4).join(" · "))+(evNotes.length>4?" · +"+(evNotes.length-4)+" more":""));
+  return items;
+}
+function wheelSVG(catPcts,size){
+  size=size||190; var cx=size/2, cy=size/2, R=size/2-34; var N=catPcts.length||7;
+  var pts=[], grid="";
+  for(var ring=1; ring<=3; ring++){ var rp=R*ring/3, gp=[]; for(var i=0;i<N;i++){ var a=-Math.PI/2+i*2*Math.PI/N; gp.push((cx+rp*Math.cos(a)).toFixed(1)+","+(cy+rp*Math.sin(a)).toFixed(1)); } grid+="<polygon points='"+gp.join(" ")+"' fill='none' stroke='#8d8268' stroke-opacity='0.35'/>"; }
+  var labels="";
+  catPcts.forEach(function(cp,i){ var a=-Math.PI/2+i*2*Math.PI/N; var x=cx+R*Math.cos(a), y=cy+R*Math.sin(a);
+    grid+="<line x1='"+cx+"' y1='"+cy+"' x2='"+x.toFixed(1)+"' y2='"+y.toFixed(1)+"' stroke='#8d8268' stroke-opacity='0.35'/>";
+    var p=cp.pct==null?0:cp.pct; pts.push((cx+R*p/100*Math.cos(a)).toFixed(1)+","+(cy+R*p/100*Math.sin(a)).toFixed(1));
+    var lx=cx+(R+20)*Math.cos(a), ly=cy+(R+16)*Math.sin(a);
+    labels+="<text x='"+lx.toFixed(1)+"' y='"+ly.toFixed(1)+"' text-anchor='middle' font-size='11' fill='#b8ab8d'>"+(cp.pct==null?"—":cp.pct)+"%</text>";
+  });
+  return "<svg width='"+size+"' height='"+size+"' viewBox='0 0 "+size+" "+size+"' role='img' aria-label='Balance wheel'>"+grid+"<polygon points='"+pts.join(" ")+"' fill='rgba(201,162,39,0.35)' stroke='#c9a227' stroke-width='2'/>"+labels+"</svg>";
+}
+/* ================= RENDER ================= */
+function render(mode){
+  var c=cfg(mode), s=state[mode];
+  c.cats.forEach(function(cat){ cat.traits.forEach(function(t){
+    $("val-"+t.id).textContent=s.values[t.id];
+    $("anc-"+t.id).innerHTML = (s.unscored && s.unscored[t.id]) ? "<b>Social Media — not scored yet.</b> Excluded from the score — not zero — until you score it." : (s.unobs[t.id] ? "<b>Not scored.</b> Excluded and the total is rescaled fairly." : anchorFor(t,s.values[t.id]));
+  });});
+  var toxCount=c.tox.filter(function(_,i){return s.tox[i];}).length;
+  $(mode+"-tox-level").textContent = "Checked: "+toxCount+" — Level: "+(toxCount<=1?"Low (score stands)":toxCount<=3?"Medium (final −25%)":"High (final cut in half)");
+  var r=compute(mode); lastResult[mode]=r;
+  if(mode!==activeMode || activeMode==="saved" || activeMode==="match") { if(mode!==currentResultMode()) return; }
+  renderResult(r);
+}
+var resultMode="her";
+function currentResultMode(){ return resultMode; }
+function renderResult(r){
+  resultMode=r.mode;
+  var band=bandFor(r.mode,r.final,r.dbList);
+  $("result-title").textContent = r.mode==="her" ? "Her Result" : "Your Result — Mirror Mode";
+  $("score100").textContent=r.final;
+  $("score10").textContent=(r.final/10).toFixed(1);
+  $("scoreBase").textContent=r.base;
+  $("result-tier").textContent=band.tier;
+  $("result-headline").textContent = r.mode==="her" && band.headline.indexOf("watch [")<0 && r.final>=80 && r.final<90 && !r.dbList.length
+    ? "Worth investing in — watch "+r.weakest.cat.name+"." : band.headline;
+  var stamps="";
+  if(r.dbList.length) stamps+="<span class='stamp db'>"+(r.mode==="her"?"Deal-breaker override":"Do the work first")+"</span>";
+  if(r.provisional) stamps+="<span class='stamp prov'>Provisional</span>";
+  if(r.fantasy) stamps+="<span class='stamp prov'>Fantasy Check</span>";
+  if(r.capped) stamps+="<span class='stamp'>Capped at 49</span>";
+  $("result-stamps").innerHTML=stamps;
+  $("verdict-text").textContent=verdictText(r);
+  $("reasoning").innerHTML=reasoningList(r).map(function(x){return "<li>"+x+"</li>";}).join("");
+  /* deep extra for him */
+  var de=$("deep-extra"); de.innerHTML="";
+  if(r.mode==="him"){
+    var arch=archetype(r);
+    var weakest3=r.scored.slice().sort(function(a,b){return a.pct-b.pct;}).slice(0,3);
+    var html="<h3>What Type of Man You Are — "+esc(arch.name)+"</h3><p class='verdict-p'>"+esc(arch.text)+"</p><p class='verdict-p'>"+esc(arch.exp)+"</p><p class='verdict-p'><b>"+esc(arch.ceiling)+"</b></p>";
+    html+="<h3>How to Improve — your 3 weakest traits</h3>";
+    weakest3.forEach(function(x){ var tip=IMPROVE[x.t.id]; if(!tip) return;
+      html+="<div class='card' style='margin:10px 0;padding:14px'><b>"+esc(x.t.name)+" — now "+x.val+"/"+x.t.max+" ("+x.pct+"%)</b><p style='margin:6px 0'><b>What to do:</b> "+esc(tip.d)+"</p><p style='margin:6px 0'><b>30-day practice:</b> "+esc(tip.p)+"</p><p style='margin:6px 0'><b>The payoff:</b> "+esc(tip.pay)+"</p></div>";
+    });
+    html+="<h3>Your Next 30 Days — The Work</h3><ul class='tight'>"+weakest3.map(function(x){return "<li><b>"+esc(x.t.name)+":</b> "+esc(IMPROVE[x.t.id]?IMPROVE[x.t.id].p:x.t.prove)+"</li>";}).join("")+"</ul>";
+    if(r.unobsList.length) html+="<h3>How to Prove It</h3><ul class='tight'>"+r.unobsList.map(function(x){return "<li><b>"+esc(x.t.name)+":</b> "+esc(x.t.prove||"")+"</li>";}).join("")+"</ul>";
+    de.innerHTML=html;
+  }
+  $("wheel").innerHTML=wheelSVG(r.catPcts,190);
+  $("catbars").innerHTML=r.catPcts.map(function(cp){ return "<div class='catbar'><div class='cb-head'><span>"+esc(cp.name)+"</span><span>"+(cp.pct==null?"not scored":cp.pct+"%")+"</span></div><div class='bar'><i class='"+(cp.pct!=null&&cp.pct<50?"weak":"")+"' style='width:"+(cp.pct||0)+"%'></i></div></div>"; }).join("");
+  /* action verdict (her) / summary (him) */
+  var ab=$("action-block");
+  if(r.mode==="her"){
+    var h="<h3>Action Verdict</h3>";
+    h+="<p><span class='flag-g'><b>Green flags:</b></span> "+(r.greens.length? esc(r.greens.map(function(x){return x.t.name+" "+x.val+"/"+x.t.max;}).join(", ")) : "None at 75% or above yet — that itself is information.")+"</p>";
+    h+="<p><span class='flag-r'><b>Red flags:</b></span> "+(r.reds.length? esc(r.reds.map(function(x){return x.t.name+" "+x.val+"/"+x.t.max;}).join(", ")) : "No trait at 25% or below.")+"</p>";
+    h+="<h3>Watch these 3 in the next 30 days</h3><ul class='tight'>"+r.watch.map(function(x){return "<li><b>"+esc(x.t.name)+"</b> ("+x.val+"/"+x.t.max+") — "+esc(x.t.find)+"</li>";}).join("")+"</ul>";
+    if(r.unobsList.length) h+="<h3>How to find out (not yet observed)</h3><ul class='tight'>"+r.unobsList.map(function(x){return "<li><b>"+esc(x.t.name)+":</b> "+esc(x.t.find)+"</li>";}).join("")+"</ul>";
+    ab.innerHTML=h;
+  } else {
+    ab.innerHTML="<h3>Your Flags</h3><p><span class='flag-g'><b>Strengths (75%+):</b></span> "+(r.greens.length?esc(r.greens.map(function(x){return x.t.name+" "+x.val+"/"+x.t.max;}).join(", ")):"None yet.")+"</p><p><span class='flag-r'><b>Liabilities (25% or below):</b></span> "+(r.reds.length?esc(r.reds.map(function(x){return x.t.name+" "+x.val+"/"+x.t.max;}).join(", ")):"None.")+"</p>";
+  }
+  $("card-zone").classList.add("hidden"); lastCardBlob=null;
+  updateListenAvailability();
+}
+/* ================= SPEECH (universal listen) ================= */
+/* Android Chrome/WebView speechSynthesis is unreliable with long or queued
+   utterances: it stalls after ~15s, drops utterances whose object was
+   garbage-collected, and getVoices() is often empty on first call. So:
+   one short chunk at a time, chained from onend; a strong reference to the
+   live utterance; a watchdog that resumes a stalled engine and re-speaks a
+   chunk the engine dropped; voices awaited before the first speak. */
+var NO_VOICE_MSG = "Your browser isn't giving this page a voice — open this app in Chrome to hear the verdict";
+/* Shared module-level player: a single speech object for the page lifetime.
+   Content signature lets a remount/re-render reuse the live session instead
+   of cancelling and restarting it (cancel on an idle engine kills the first
+   utterance in Android WebViews). */
+var speech = { chunks:[], idx:0, speaking:false, paused:false, state:"idle",
+  currentUtterance:null, watchdog:null, retries:0, generation:0,
+  lastSpeakAt:0, watchdogMs:5000, voicesTimeoutMs:800,
+  startTimer:null, chunkStartedAt:0, firstStarted:false, fastChunks:0, signature:"" };
+function speechSignature(r){ try{ return r.mode+"|"+r.final+"|"+r.base+"|"+(r.dbList||[]).join(",")+"|"+buildScript(r).map(function(c){return c.text;}).join(" ").length; }catch(e){ return ""; } }
+function safeCancel(){
+  /* Never cancel an idle engine — in WebViews that poisons the next speak. */
+  try{ var s=window.speechSynthesis; if(s && (s.speaking || s.pending || s.paused)) s.cancel(); }catch(e){}
+}
+function clearStartTimer(){ if(speech.startTimer){ clearTimeout(speech.startTimer); speech.startTimer=null; } }
+function failNoVoice(){
+  clearStartTimer(); clearWatchdog();
+  speech.generation++;
+  speech.state="idle"; speech.speaking=false; speech.paused=false;
+  speech.currentUtterance=null; speech.chunks=[]; speech.idx=0; speech.fastChunks=0; speech.firstStarted=false;
+  safeCancel();
+  var el=$("now-reading"); if(el) el.textContent=NO_VOICE_MSG;
+}
+function cleanForSpeech(t){
+  return t.replace(/<[^>]+>/g," ").replace(/&amp;/g,"and").replace(/%/g," percent").replace(/\//g," out of ").replace(/—/g,", ").replace(/–/g," to ").replace(/\s+/g," ").trim();
+}
+function splitSentences(t){ var parts=t.match(/[^.!?]+[.!?]+|\S[^.!?]*$/g); return parts? parts.map(function(x){return x.trim();}).filter(Boolean):[t]; }
+function chunkText(t){
+  var MAX=120, out=[];
+  splitSentences(t).forEach(function(sent){
+    if(sent.length<=MAX){ out.push(sent); return; }
+    var clauses=sent.match(/[^,;:]+[,;:]+|\S[^,;:]*$/g)||[sent];
+    var buf="";
+    function flushBuf(){ if(buf){ out.push(buf); buf=""; } }
+    clauses.forEach(function(cl){
+      cl=cl.trim(); if(!cl) return;
+      var joined=buf?buf+" "+cl:cl;
+      if(joined.length<=MAX){ buf=joined; return; }
+      flushBuf();
+      if(cl.length<=MAX){ buf=cl; return; }
+      var words=cl.split(/\s+/), line="";
+      words.forEach(function(w){
+        var j=line?line+" "+w:w;
+        if(j.length>MAX){ if(line) out.push(line); line=w; } else line=j;
+      });
+      buf=line;
+    });
+    flushBuf();
+  });
+  return out.filter(Boolean);
+}
+function buildScript(r){
+  var band=bandFor(r.mode,r.final,r.dbList);
+  var secs=[];
+  function add(label,text){ chunkText(cleanForSpeech(text)).forEach(function(s){ secs.push({label:label,text:s}); }); }
+  if(r.dbList.length) add("Deal-breaker", r.mode==="her" ? "Deal-breaker checked: "+r.dbList.join(", ")+". The verdict is overridden." : "Deal-breaker in your own column: "+r.dbList.join(", ")+". Do the work first.");
+  add("Scores","Final score "+r.final+" out of 100. That is "+(r.final/10).toFixed(1)+" out of 10. Base score before toxicity was "+r.base+". Tier: "+band.tier+".");
+  add("Verdict headline", $("result-headline").textContent);
+  add("The verdict", verdictText(r));
+  add("How this conclusion was reached", reasoningList(r).map(function(x){return cleanForSpeech(x);}).join(" "));
+  if(r.mode==="her"){
+    add("Green flags","Green flags: "+(r.greens.length? r.greens.map(function(x){return x.t.name+" "+x.val+" of "+x.t.max;}).join(", "):"none at 75 percent or above yet")+".");
+    add("Red flags","Red flags: "+(r.reds.length? r.reds.map(function(x){return x.t.name+" "+x.val+" of "+x.t.max;}).join(", "):"no trait at 25 percent or below")+".");
+    add("Watch these 3 in the next 30 days","Watch these three in the next 30 days. "+r.watch.map(function(x){return x.t.name+": "+x.t.find;}).join(" "));
+    if(r.unobsList.length) add("How to find out","Not yet observed. "+r.unobsList.map(function(x){return x.t.name+": "+x.t.find;}).join(" "));
+  } else {
+    var arch=archetype(r);
+    add("What type of man you are","What type of man you are: "+arch.name+". "+arch.text+" "+arch.exp+" "+arch.ceiling);
+    var weakest3=r.scored.slice().sort(function(a,b){return a.pct-b.pct;}).slice(0,3);
+    add("How to improve","How to improve. Your three weakest traits. "+weakest3.map(function(x){ var tip=IMPROVE[x.t.id]; return x.t.name+", now "+x.val+" of "+x.t.max+". What to do: "+(tip?tip.d:"")+" Thirty-day practice: "+(tip?tip.p:"")+" The payoff: "+(tip?tip.pay:""); }).join(" "));
+    add("Your next 30 days","Your next 30 days, the work. "+weakest3.map(function(x){return x.t.name+": "+(IMPROVE[x.t.id]?IMPROVE[x.t.id].p:"");}).join(" "));
+  }
+  return secs;
+}
+function pickVoice(){
+  /* On-device voices only: never hand the verdict text to a network voice. */
+  try{
+    var vs=window.speechSynthesis.getVoices(), local=[];
+    for(var i=0;i<vs.length;i++){ if(vs[i].localService) local.push(vs[i]); }
+    for(var a=0;a<local.length;a++){ if(/^en[-_]US/i.test(local[a].lang)) return local[a]; }
+    for(var b=0;b<local.length;b++){ if(/^en/i.test(local[b].lang)) return local[b]; }
+    if(local.length) return local[0];
+  }catch(e){}
+  return null; /* no local voice listed — leave unset rather than pick a remote one */
+}
+function ensureVoices(cb){
+  var synth=window.speechSynthesis, done=false;
+  function finish(){ if(done) return; done=true; cb(); }
+  try{ if(synth.getVoices() && synth.getVoices().length){ finish(); return; } }catch(e){}
+  var gen=speech.generation;
+  if(synth.addEventListener){
+    var onchg=function(){ try{ if(synth.getVoices() && synth.getVoices().length){ synth.removeEventListener("voiceschanged",onchg); finish(); } }catch(e){} };
+    synth.addEventListener("voiceschanged",onchg);
+    setTimeout(function(){ if(synth.removeEventListener) synth.removeEventListener("voiceschanged",onchg); finish(); }, speech.voicesTimeoutMs);
+  } else {
+    var prev=synth.onvoiceschanged;
+    synth.onvoiceschanged=function(){ synth.onvoiceschanged=prev; finish(); };
+    setTimeout(finish, speech.voicesTimeoutMs);
+  }
+  /* cb still runs via timeout if voices never arrive; guard at call site
+     (generation) keeps a stopped session from speaking. */
+  void gen;
+}
+function clearWatchdog(){ if(speech.watchdog){ clearInterval(speech.watchdog); speech.watchdog=null; } }
+function startWatchdog(){
+  clearWatchdog();
+  speech.watchdog=setInterval(function(){
+    if(speech.state!=="playing" || speech.paused) return;
+    if(!("speechSynthesis" in window)) return;
+    var synth=window.speechSynthesis;
+    try{
+      if(synth.speaking){ synth.resume(); return; } /* the ~15s stall: nudge it */
+      if(!synth.pending && speech.idx<speech.chunks.length && (Date.now()-speech.lastSpeakAt)>4000){
+        /* Engine went idle mid-verdict without firing onend — restart the
+           current chunk instead of dropping to Ready. */
+        speech.currentUtterance=null;
+        speakCurrent();
+      }
+    }catch(e){}
+  }, speech.watchdogMs);
+}
+function finishSpeech(){
+  clearWatchdog(); clearStartTimer();
+  speech.state="idle"; speech.speaking=false; speech.paused=false;
+  speech.currentUtterance=null; speech.retries=0; speech.signature="";
+  $("now-reading").textContent="Finished reading the verdict.";
+}
+function speakCurrent(){
+  if(speech.state!=="playing") return;
+  if(speech.idx>=speech.chunks.length){ finishSpeech(); return; }
+  /* On-device voices only — never fall back to a network/default voice. */
+  var v=pickVoice();
+  if(!v){ failNoVoice(); return; }
+  var chunk=speech.chunks[speech.idx];
+  $("now-reading").textContent="Now reading: "+chunk.label;
+  var u=new SpeechSynthesisUtterance(chunk.text);
+  u.voice=v;
+  u.rate=1.0;
+  speech.currentUtterance=u; /* strong ref — a GC'd utterance never fires onend */
+  speech.lastSpeakAt=Date.now();
+  speech.chunkStartedAt=Date.now();
+  var gen=speech.generation;
+  var isFirst = speech.idx===0 && !speech.firstStarted;
+  u.onstart=function(){
+    if(gen!==speech.generation) return;
+    speech.firstStarted=true;
+    if(isFirst) clearStartTimer();
+  };
+  u.onend=function(){
+    if(gen!==speech.generation || speech.state!=="playing") return;
+    var dur=Date.now()-speech.chunkStartedAt;
+    /* Instant-end detection: an engine that ends every chunk in <250ms is
+       not really speaking. After the first 3 such chunks, stop honestly. */
+    if(speech.idx<3){
+      if(dur<250){ speech.fastChunks++; } else { speech.fastChunks=0; }
+      if(speech.fastChunks>=3){ failNoVoice(); return; }
+    }
+    speech.currentUtterance=null; speech.retries=0; speech.idx++;
+    speakCurrent();
+  };
+  u.onerror=function(ev){
+    if(gen!==speech.generation || speech.state!=="playing") return;
+    var err=ev&&ev.error;
+    if(err==="canceled"||err==="interrupted") return; /* our own Stop/cancel */
+    speech.currentUtterance=null;
+    if(speech.retries<1){ speech.retries++; speakCurrent(); } /* one retry, then advance */
+    else { speech.retries=0; speech.idx++; speakCurrent(); }
+  };
+  try{ window.speechSynthesis.speak(u); }
+  catch(e){ speech.currentUtterance=null; speech.idx++; speakCurrent(); return; }
+  if(isFirst){
+    clearStartTimer();
+    speech.startTimer=setTimeout(function(){
+      if(gen!==speech.generation || speech.state!=="playing") return;
+      if(!speech.firstStarted){ failNoVoice(); }
+    },3000);
+  }
+}
+function startSpeech(){
+  var r=lastResult[resultMode]; if(!r) return;
+  if(!("speechSynthesis" in window)){ $("now-reading").textContent=NO_VOICE_MSG; return; }
+  var sig=speechSignature(r);
+  /* Same content already playing in the shared player — keep it playing
+     instead of cancelling/restarting (remount safety). */
+  if(speech.state==="playing" && speech.signature===sig && sig){ return; }
+  stopSpeech(true);
+  var gen=speech.generation;
+  speech.chunks=buildScript(r); speech.idx=0; speech.retries=0;
+  speech.fastChunks=0; speech.firstStarted=false; speech.signature=sig;
+  if(!speech.chunks.length) return;
+  speech.state="playing"; speech.speaking=true; speech.paused=false;
+  /* No cancel() here: the engine is idle after stopSpeech's safeCancel, and
+     cancelling an idle WebView engine kills the first utterance. */
+  ensureVoices(function(){
+    if(gen!==speech.generation || speech.state!=="playing") return;
+    if(!pickVoice()){ failNoVoice(); return; }
+    startWatchdog();
+    speakCurrent();
+  });
+}
+function stopSpeech(silent){
+  var wasActive = speech.speaking || speech.paused || speech.state==="playing";
+  speech.generation++;
+  clearWatchdog(); clearStartTimer();
+  speech.state="idle";
+  if("speechSynthesis" in window){ safeCancel(); }
+  speech.speaking=false; speech.paused=false; speech.chunks=[]; speech.idx=0;
+  speech.currentUtterance=null; speech.retries=0; speech.fastChunks=0; speech.firstStarted=false; speech.signature="";
+  if(!silent && wasActive) $("now-reading").textContent="Reading stopped.";
+}
+function updateListenAvailability(){
+  if(!("speechSynthesis" in window)){ $("now-reading").textContent="Voice reading isn't available in this browser."; $("btn-listen").disabled=true; }
+}
+$("btn-listen").addEventListener("click",startSpeech);
+$("btn-pause").addEventListener("click",function(){ if("speechSynthesis" in window && speech.speaking && !speech.paused){ try{ window.speechSynthesis.pause(); }catch(e){} speech.paused=true; $("now-reading").textContent="Paused — press Resume to keep listening."; } });
+$("btn-resume").addEventListener("click",function(){ if("speechSynthesis" in window && speech.paused){ speech.paused=false; try{ window.speechSynthesis.resume(); }catch(e){} var ch=speech.chunks[speech.idx]; $("now-reading").textContent="Now reading: "+(ch?ch.label:"verdict"); } });
+$("btn-stop").addEventListener("click",function(){ stopSpeech(); });
+
+/* ================= STORAGE ================= */
+function loadStore(){ try{ var d=JSON.parse(localStorage.getItem(LS_KEY)||"null"); if(d&&d.her&&d.him) return d; }catch(e){} return {her:[],him:[]}; }
+function saveStore(d){ try{ localStorage.setItem(LS_KEY,JSON.stringify(d)); }catch(e){} }
+function snapshot(mode){
+  var r=lastResult[mode]; var s=state[mode];
+  return { id: currentProfileId[mode] || ("p"+Date.now()), mode:mode,
+    name: (mode==="her"? $("her-name").value : $("him-name").value).trim(),
+    known: mode==="her"? $("her-known").value : "",
+    height: mode==="her"? $("her-height").value : "", weight: mode==="her"? $("her-weight").value : "",
+    values:Object.assign({},s.values), unobs:Object.assign({},s.unobs), notes:Object.assign({},s.notes),
+    tox:Object.assign({},s.tox), db:Object.assign({},s.db), unscored:Object.assign({},s.unscored||{}),
+    base:r.base, final:r.final, dbList:r.dbList.slice(), weakest:r.weakest? r.weakest.t.name:"", strongest:r.strongest? r.strongest.t.name:"",
+    tier: bandFor(mode,r.final,r.dbList).tier,
+    history: [] };
+}
+$("btn-save").addEventListener("click",function(){
+  var mode=resultMode; var store=loadStore(); var snap=snapshot(mode);
+  var existing=null; store[mode].forEach(function(p){ if(p.id===snap.id) existing=p; });
+  var entry={date:new Date().toISOString().slice(0,10), base:snap.base, final:snap.final}; if(window.__socialJustUpdated && window.__socialJustUpdated[mode]){ entry.note="Social Media update"; window.__socialJustUpdated[mode]=false; }
+  if(existing){ snap.history=existing.history.concat([entry]); var idx=store[mode].indexOf(existing); store[mode][idx]=snap; }
+  else { snap.history=[entry]; store[mode].push(snap); currentProfileId[mode]=snap.id; }
+  saveStore(store);
+  $("save-msg").textContent="Saved on this device — "+(snap.name||(mode==="her"?"Her profile":"Your profile"))+" at "+snap.final+"/100, "+snap.history.length+" score entr"+(snap.history.length===1?"y":"ies")+" in its history.";
+  renderSaved();
+});
+function applyProfile(mode,p){
+  state[mode]=blankState(cfg(mode));
+  Object.keys(p.values||{}).forEach(function(k){ if(k in state[mode].values) state[mode].values[k]=p.values[k]; });
+  state[mode].unobs=Object.assign({},p.unobs); state[mode].notes=Object.assign({},p.notes);
+  state[mode].unscored=Object.assign({},p.unscored||{});
+  (SOCIAL_IDS[mode]||[]).forEach(function(sid){ if(!p.values || !(sid in p.values)) state[mode].unscored[sid]=true; else if(!(sid in (p.unscored||{})) && p.unscored===undefined) state[mode].unscored[sid]=false; });
+  if(p.unscored) state[mode].unscored=Object.assign({},p.unscored);
+  state[mode].tox=Object.assign({},p.tox); state[mode].db=Object.assign({},p.db);
+  currentProfileId[mode]=p.id;
+  cfg(mode).cats.forEach(function(cat){ cat.traits.forEach(function(t){
+    $("rng-"+t.id).value=state[mode].values[t.id];
+    $("unobs-"+t.id).checked=!!state[mode].unobs[t.id];
+    $("note-"+t.id).value=state[mode].notes[t.id]||"";
+  });});
+  var c=cfg(mode);
+  document.querySelectorAll("#"+mode+"-tox input").forEach(function(inp){ inp.checked=!!state[mode].tox[inp.getAttribute("data-tox")]; });
+  document.querySelectorAll("#"+mode+"-db input").forEach(function(inp){ inp.checked=!!state[mode].db[inp.getAttribute("data-db")]; });
+  if(mode==="her"){ $("her-name").value=p.name||""; $("her-height").value=p.height||""; $("her-weight").value=p.weight||""; if(p.known) $("her-known").value=p.known; }
+  else $("him-name").value=p.name||"";
+  switchMode(mode); render(mode);
+}
+function historyChart(p){
+  if(!p.history || p.history.length<2) return "<p class='mutelist'>One score so far ("+(p.history&&p.history[0]?p.history[0].date:"")+"). Save again after a re-score to start the line.</p>";
+  var w=300,h=80,pad=8;
+  var pts=p.history.map(function(e,i){ var x=pad+i*(w-2*pad)/(p.history.length-1); var y=h-pad-(e.final/100)*(h-2*pad); return x.toFixed(1)+","+y.toFixed(1); });
+  return "<svg width='"+w+"' height='"+h+"' viewBox='0 0 "+w+" "+h+"' role='img' aria-label='Score history chart'><polyline points='"+pts.join(" ")+"' fill='none' stroke='#c9a227' stroke-width='2'/>"+p.history.map(function(e,i){ var x=pad+i*(w-2*pad)/(p.history.length-1); var y=h-pad-(e.final/100)*(h-2*pad); return "<circle cx='"+x.toFixed(1)+"' cy='"+y.toFixed(1)+"' r='3' fill='#e8c766'/><text x='"+x.toFixed(1)+"' y='"+(y-6)+"' text-anchor='middle' font-size='10' fill='#b8ab8d'>"+e.final+"</text>"; }).join("")+"</svg><p class='mutelist'>"+p.history.map(function(e){return e.date+": "+e.final+(e.note?" ("+e.note+")":"");}).join(" · ")+"</p>";
+}
+function renderSaved(){
+  var store=loadStore();
+  ["her","him"].forEach(function(mode){
+    var host=$("saved-"+mode); host.innerHTML="";
+    if(!store[mode].length){ host.innerHTML="<p class='mutelist'>No saved profiles yet. Score "+(mode==="her"?"her":"yourself")+", then press “Save this profile”.</p>"; return; }
+    store[mode].forEach(function(p){
+      var div=document.createElement("div"); div.className="profile-item";
+      div.innerHTML="<div class='pi-head'><b>"+esc(p.name||(mode==="her"?"Unnamed":"You"))+"</b><span class='pi-score'>"+p.final+" / 100 · "+(p.final/10).toFixed(1)+"</span></div>"+
+        "<p class='mutelist' style='margin:4px 0'>"+esc(p.tier)+(p.dbList&&p.dbList.length?" · Deal-breaker: "+esc(p.dbList.join(", ")):"")+" · Strongest: "+esc(p.strongest||"")+" · Weakest: "+esc(p.weakest||"")+"</p>"+historyChart(p)+
+        "<div class='btnrow' style='margin:8px 0 0'><button class='btn small' data-act='open'>Open</button><button class='btn small ghost' data-act='dup'>Duplicate</button><button class='btn small danger' data-act='del'>Delete</button></div>";
+      div.querySelectorAll("button").forEach(function(b){ b.addEventListener("click",function(){
+        var st=loadStore(); var idx=st[mode].findIndex(function(x){return x.id===p.id;}); if(idx<0) return;
+        if(b.getAttribute("data-act")==="open") applyProfile(mode,st[mode][idx]);
+        if(b.getAttribute("data-act")==="dup"){ var copy=JSON.parse(JSON.stringify(st[mode][idx])); copy.id="p"+Date.now(); copy.name=(copy.name||"Profile")+" (copy)"; st[mode].push(copy); saveStore(st); renderSaved(); }
+        if(b.getAttribute("data-act")==="del"){ st[mode].splice(idx,1); saveStore(st); renderSaved(); }
+      });});
+      host.appendChild(div);
+    });
+  });
+  fillSelect($("cmp-a"),store.her); fillSelect($("cmp-b"),store.her);
+  fillSelect($("match-her"),store.her); fillSelect($("match-him"),store.him);
+}
+function fillSelect(sel,list){ if(!sel) return; var cur=sel.value; sel.innerHTML=list.length? list.map(function(p){return "<option value='"+p.id+"'>"+esc(p.name||"Unnamed")+" — "+p.final+"/100</option>";}).join("") : "<option value=''>No saved profiles</option>"; if(cur) sel.value=cur; }
+/* compare */
+$("btn-compare").addEventListener("click",function(){
+  var store=loadStore(); var a=store.her.filter(function(p){return p.id===$("cmp-a").value;})[0]; var b=store.her.filter(function(p){return p.id===$("cmp-b").value;})[0];
+  var out=$("compare-out"); if(!a||!b||a.id===b.id){ out.innerHTML="<p class='mutelist'>Pick two different saved profiles.</p>"; return; }
+  var rows=allTraits(HER).map(function(x){ var va=a.values[x.t.id]||0, vb=b.values[x.t.id]||0;
+    return "<tr><td data-l='Trait'>"+esc(x.t.name)+"</td><td data-l='"+esc(a.name||"A")+"' class='"+(va>vb?"win":"")+"'>"+va+"/"+x.t.max+"</td><td data-l='"+esc(b.name||"B")+"' class='"+(vb>va?"win":"")+"'>"+vb+"/"+x.t.max+"</td></tr>"; }).join("");
+  out.innerHTML="<p><b>"+esc(a.name||"A")+"</b>: "+a.final+"/100 · <b>"+esc(b.name||"B")+"</b>: "+b.final+"/100</p><table class='cmp'><thead><tr><th>Trait</th><th>"+esc(a.name||"A")+"</th><th>"+esc(b.name||"B")+"</th></tr></thead><tbody>"+rows+"</tbody></table>";
+});
+/* match */
+$("btn-match").addEventListener("click",function(){
+  var store=loadStore(); var h=store.her.filter(function(p){return p.id===$("match-her").value;})[0]; var m=store.him.filter(function(p){return p.id===$("match-him").value;})[0];
+  var out=$("match-out"); if(!h||!m){ out.innerHTML="<p class='mutelist'>Save one profile in each mode first, then run the match.</p>"; return; }
+  function pctsFor(mode,p){ var saved=state[mode]; var tmpState=state[mode]; var st=blankState(cfg(mode)); Object.keys(p.values||{}).forEach(function(k){ if(k in st.values) st.values[k]=p.values[k]; }); st.unobs=Object.assign({},p.unobs); st.unscored=Object.assign({},p.unscored||{}); (SOCIAL_IDS[mode]||[]).forEach(function(sid){ if(!p.values || !(sid in p.values)) st.unscored[sid]=true; }); state[mode]=st; var r=compute(mode); state[mode]=tmpState; return r; }
+  var rh=pctsFor("her",h), rm=pctsFor("him",m);
+  var gap=m.final-h.final; var call="";
+  if(h.dbList&&h.dbList.length) call="OVERRIDE — her deal-breaker ("+h.dbList.join(", ")+") ends the match regardless of totals.";
+  else if(m.dbList&&m.dbList.length) call="OVERRIDE — his deal-breaker ("+m.dbList.join(", ")+") ends the match. Do the work first.";
+  else if(Math.abs(gap)<=5) call="Matched — you're operating at the level she is.";
+  else if(gap<0 && gap>=-15) call="She's ahead of you — by "+Math.abs(gap)+" points. Her weakest area is "+rh.weakest.cat.name+"; yours is "+rm.weakest.cat.name+". Close your gap before you grade hers.";
+  else if(gap<-15) call="The gap is the verdict — she is "+Math.abs(gap)+" points ahead of you. A man "+Math.abs(gap)+" points behind does not get to set this standard yet.";
+  else call="You are "+gap+" points ahead. Her weakest area is "+rh.weakest.cat.name+" — that is the area to watch, not a reason to relax yours ("+rm.weakest.cat.name+").";
+  out.innerHTML="<div class='scores'><div class='scorebox'><div class='big'>"+h.final+"</div><div class='lbl'>"+esc(h.name||"Her")+" / 100</div></div><div class='scorebox'><div class='big'>"+m.final+"</div><div class='lbl'>"+esc(m.name||"You")+" / 100</div></div></div>"+
+    "<p class='headline'>"+esc(call)+"</p>"+
+    "<div class='wheelwrap'><div><p class='mutelist' style='text-align:center'>Her wheel</p>"+wheelSVG(rh.catPcts,170)+"</div><div><p class='mutelist' style='text-align:center'>Your wheel</p>"+wheelSVG(rm.catPcts,170)+"</div></div>"+
+    "<p class='mutelist'>Her weakest category: "+esc(rh.weakest.cat.name)+" · Your weakest category: "+esc(rm.weakest.cat.name)+". Different systems — totals and weakest areas only, by design.</p>";
+});
+/* ================= VERDICT CARD ================= */
+$("btn-card").addEventListener("click",function(){
+  var r=lastResult[resultMode]; if(!r) return;
+  var mode=resultMode; var band=bandFor(mode,r.final,r.dbList);
+  var hide=$("hide-name").checked;
+  var rawName=(mode==="her"? $("her-name").value : $("him-name").value).trim();
+  var displayName = hide ? (mode==="her"?"Her Score":"My Score") : (rawName || (mode==="her"?"Her Score":"My Score"));
+  var cv=document.createElement("canvas"); cv.width=1080; cv.height=1350; var g=cv.getContext("2d");
+  g.fillStyle="#12100b"; g.fillRect(0,0,1080,1350);
+  g.strokeStyle="#c9a227"; g.lineWidth=6; g.strokeRect(36,36,1008,1278);
+  g.fillStyle="#c9a227"; g.font="700 34px Georgia"; g.textAlign="center";
+  g.fillText("THE WHOLE WOMAN SCORE",540,130);
+  if(mode==="him"){ g.font="700 26px Georgia"; g.fillStyle="#b8ab8d"; g.fillText("MIRROR MODE — THE WHOLE MAN SCORE",540,172); }
+  g.fillStyle="#f2ead8"; g.font="700 64px Georgia";
+  wrapText(g,displayName,540,300,900,70);
+  g.fillStyle="#e8c766"; g.font="700 300px Georgia"; g.fillText(String(r.final),540,620);
+  g.fillStyle="#f2ead8"; g.font="700 54px Georgia"; g.fillText("out of 100   ·   "+(r.final/10).toFixed(1)+" out of 10",540,710);
+  g.fillStyle="#c9a227"; g.font="700 44px Georgia"; wrapText(g,band.tier,540,810,900,52);
+  g.fillStyle="#f2ead8"; g.font="italic 40px Georgia";
+  var head = mode==="her" && r.final>=80 && r.final<90 && !r.dbList.length ? "Worth investing in — watch "+r.weakest.cat.name+"." : band.headline;
+  wrapText(g,head,540,900,880,50);
+  g.font="34px Georgia"; g.fillStyle="#b8ab8d";
+  wrapText(g,"Top strength: "+r.strongest.t.name+" ("+r.strongest.val+"/"+r.strongest.t.max+")",540,1050,900,42);
+  wrapText(g,"Biggest weakness: "+r.weakest.t.name+" ("+r.weakest.val+"/"+r.weakest.t.max+")",540,1110,900,42);
+  if(r.dbList.length){ g.save(); g.translate(540,1210); g.rotate(-0.03); g.strokeStyle="#e4573d"; g.lineWidth=5; g.strokeRect(-330,-48,660,84); g.fillStyle="#e4573d"; g.font="900 44px Arial"; g.fillText("DEAL-BREAKER",0,12); g.restore(); }
+  else { g.fillStyle="#8d8268"; g.font="30px Georgia"; g.fillText("By Tooo Much Moxie",540,1230); }
+  if(r.provisional){ g.fillStyle="#e0a458"; g.font="700 28px Arial"; g.fillText("PROVISIONAL SCORE",540,1270); }
+  cv.toBlob(function(blob){
+    if(!blob) return;
+    lastCardBlob=blob;
+    if(window.__cardUrl) { try{ URL.revokeObjectURL(window.__cardUrl); }catch(e){} }
+    var url=URL.createObjectURL(blob);
+    window.__cardUrl=url;
+    $("cardImg").src=url; $("btn-download-card").href=url;
+    var full=$("cardImgFull"); if(full) full.src=url;
+    var sf=$("share-feedback"); if(sf) sf.textContent="";
+    $("card-zone").classList.remove("hidden");
+    $("card-zone").scrollIntoView({behavior:"smooth",block:"center"});
+  },"image/png");
+});
+function wrapText(g,text,x,y,maxW,lh){ var words=text.split(" "); var line="",yy=y; for(var i=0;i<words.length;i++){ var test=line?line+" "+words[i]:words[i]; if(g.measureText(test).width>maxW && line){ g.fillText(line,x,yy); line=words[i]; yy+=lh; } else line=test; } g.fillText(line,x,yy); return yy; }
+$("hide-name").addEventListener("change",function(){ if(lastCardBlob) $("btn-card").click(); });
+$("btn-share-card").addEventListener("click",function(){
+  var fb=$("share-feedback");
+  var SHARE_FALLBACK="Sharing is not available in this browser — use Download, or long-press the image to save it.";
+  function showFallback(){ if(fb) fb.textContent=SHARE_FALLBACK; }
+  if(!lastCardBlob){ showFallback(); return; }
+  if(navigator.share){
+    try{
+      var f=new File([lastCardBlob],"whole-woman-score-card.png",{type:"image/png"});
+      var data={files:[f],title:"The Whole Woman Score"};
+      if(navigator.canShare && navigator.canShare(data)){ navigator.share(data).catch(function(err){ if(err && err.name!=="AbortError") showFallback(); }); return; }
+      if(navigator.canShare){ showFallback(); return; }
+      navigator.share({title:"The Whole Woman Score",text:"My verdict card from The Whole Woman Score — by Tooo Much Moxie"}).catch(function(err){ if(err && err.name!=="AbortError") showFallback(); });
+      return;
+    }catch(e){ showFallback(); return; }
+  }
+  showFallback();
+});
+$("btn-open-card-full").addEventListener("click",function(){
+  var src=$("cardImg").src; if(!src) return;
+  $("cardImgFull").src=src;
+  $("card-fullscreen").classList.remove("hidden");
+  document.body.style.overflow="hidden";
+});
+$("btn-close-card-full").addEventListener("click",function(){
+  $("card-fullscreen").classList.add("hidden");
+  document.body.style.overflow="";
+});
+/* ================= EXAMPLES / RESET ================= */
+function setScores(mode,map){
+  var c=cfg(mode); state[mode]=blankState(c);
+  Object.keys(map).forEach(function(k){ state[mode].values[k]=map[k]; });
+  c.cats.forEach(function(cat){ cat.traits.forEach(function(t){ $("rng-"+t.id).value=state[mode].values[t.id]; $("unobs-"+t.id).checked=false; $("note-"+t.id).value=""; }); });
+  document.querySelectorAll("#"+mode+"-tox input").forEach(function(inp){ inp.checked=false; });
+  document.querySelectorAll("#"+mode+"-db input").forEach(function(inp){ inp.checked=false; });
+  currentProfileId[mode]=null; stopSpeech(); render(mode);
+}
+$("ex-balanced").addEventListener("click",function(){ setScores("her",{honesty:8,loyalty:8,accountability:8,personality:4,caring:4,understanding:4,gratitude:3,femininity:4,leadership:3,respect:4,peace:3,looks:4,inshape:4,hwprop:4,hygiene:4,cooking:4,cleaning:4,family:3,communication:3,findisc:4,consistency:3,values:3}); $("her-known").value="3-6m"; render("her"); document.getElementById("result").scrollIntoView({behavior:"smooth"}); });
+$("ex-toxic").addEventListener("click",function(){ setScores("her",{honesty:4,loyalty:4,accountability:4,personality:3,caring:2,understanding:2,gratitude:3,femininity:3,leadership:2,respect:2,peace:2,looks:4,inshape:2,hwprop:2,hygiene:2,cooking:3,cleaning:3,family:2,communication:3,findisc:3,consistency:2,values:3});
+  [0,1,2,3,4].forEach(function(i){ state.her.tox[i]=true; document.querySelectorAll("#her-tox input")[i].checked=true; }); render("her"); document.getElementById("result").scrollIntoView({behavior:"smooth"}); });
+$("ex-man").addEventListener("click",function(){ setScores("him",{m_honesty:6,m_accountability:7,m_word:6,m_leadership:6,m_purpose:6,m_initiative:5,m_workethic:6,m_findisc:5,m_resourceful:5,m_inshape:6,m_protector:5,m_emotional:5,m_discipline:5,m_order:4,m_hygiene:4,m_communication:4,m_caring:4,m_values:4}); document.getElementById("result").scrollIntoView({behavior:"smooth"}); });
+$("her-reset").addEventListener("click",function(){ setScores("her",{}); });
+$("him-reset").addEventListener("click",function(){ setScores("him",{}); });
+$("her-name").addEventListener("input",function(){});
+$("her-known").addEventListener("change",function(){ stopSpeech(); render("her"); });
+/* ================= TABS / PRINT / INIT ================= */
+function switchMode(mode){
+  stopSpeech();
+  if(mode==="her"||mode==="him") resultMode=mode;
+  document.querySelectorAll(".tab").forEach(function(t){ t.setAttribute("aria-selected", t.getAttribute("data-mode")===mode ? "true":"false"); });
+  document.querySelectorAll(".panel").forEach(function(p){ p.classList.remove("active"); });
+  var panel=$("panel-"+mode); if(panel) panel.classList.add("active");
+  var res=$("result"); res.style.display=(mode==="her"||mode==="him")?"":"none";
+  if(mode==="her"||mode==="him") render(mode);
+  if(mode==="saved"||mode==="match") renderSaved();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll(".tab").forEach(function(t){ t.addEventListener("click",function(){ switchMode(t.getAttribute("data-mode")); }); });
+(function buildPrint(){
+  var rows="<tr><th>Trait</th><th>Max</th><th>Score</th><th>Evidence — what you actually saw</th></tr>";
+  HER.cats.forEach(function(cat){ rows+="<tr><td colspan='4'><b>"+esc(cat.name)+"</b></td></tr>"; cat.traits.forEach(function(t){ rows+="<tr><td>"+esc(t.name)+"</td><td>"+t.max+"</td><td></td><td></td></tr>"; }); });
+  $("print-table").innerHTML=rows;
+})();
+buildTraits("her"); buildTraits("him"); buildChecks("her"); buildChecks("him");
+render("her"); render("him"); renderSaved(); switchMode("her");
+updateListenAvailability();
+</script>
+<style>
+.methodtoggle{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.methodtoggle button{flex:1 1 160px;padding:12px 10px;border:1px solid var(--line);background:var(--card2);color:var(--ink);border-radius:10px;font-weight:800;cursor:pointer;min-height:48px}
+.methodtoggle button[aria-pressed="true"]{background:var(--gold);color:#171204;border-color:var(--gold)}
+.quizq{margin:16px 0;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.quizq p{font-weight:700;margin:0 0 8px}
+.quizprog{color:var(--gold);font-weight:800;letter-spacing:.05em;font-size:.85rem;text-transform:uppercase}
+.quizerr{color:var(--red);font-weight:700;min-height:1.2em}
+#card-zone{position:relative}
+#card-stamp{position:absolute;top:64px;right:10px;transform:rotate(3deg);border:2px solid var(--red);color:var(--red);background:rgba(18,16,11,.85);font-weight:900;letter-spacing:.06em;padding:4px 10px;border-radius:8px;text-transform:uppercase;font-size:.8rem;display:none}
+#card-stamp.quiz{border-color:var(--green);color:var(--green)}
+.reviewq{font-size:.92rem;margin:8px 0}
+.reviewq b{display:block}
+.reviewq span{color:var(--muted)}
+</style>
+<script>
+"use strict";
+/* ================= REAL QUIZ LAYER ================= */
+var SETS_HER={
+ ev:[["It never matched what she said",0],["It matched exactly, every time",1],["About half the time it matched",".5"],["It matched most times; a miss was owned right away",".75"],["It usually fell short of what she said",".25"]],
+ fr:[["Only when she had to, or someone was watching",".25"],["Consistently — it is her normal standard",1],["Rarely or never",0],["Most of the time, with occasional slips",".75"],["About half the time",".5"]],
+ ob:[["Clearly neglected or off most days",0],["Consistently on point, day in and day out",1],["Fine for occasions, off day to day",".25"],["Mostly on point, with regular slips",".75"],["About half and half",".5"]],
+ re:[["It went badly — blame, heat, avoidance or shutdown",0],["She handled it cleanly and it moved forward",1],["She avoided it or it dragged on unresolved",".25"],["Mostly handled, with a rough patch",".75"],["It got talked about but never really resolved",".5"]]};
+var SETS_HIM={
+ ev:[["It basically never happened as promised",0],["It happened exactly as promised, every time",1],["About half the time",".5"],["Almost every time; one miss, owned the same day",".75"],["It usually fell short",".25"]],
+ fr:[["Only when pushed or watched",".25"],["Consistently — it is your normal standard",1],["Rarely or never",0],["Most of the time, with occasional slips",".75"],["About half the time",".5"]],
+ ob:[["Clearly neglected most days",0],["Consistently on point, day in and day out",1],["Only for occasions",".25"],["Mostly on point, with regular slips",".75"],["About half and half",".5"]],
+ re:[["Honestly, it went badly — blame, heat, avoidance or shutdown",0],["You handled it cleanly and it moved forward",1],["You avoided it or let it drag",".25"],["Mostly handled, with a rough patch",".75"],["Talked about, never really resolved",".5"]]};
+var QRAW_HER={
+ honesty:[["In the last 30 days, when she told you where she had been or what something cost, how did it check out when you learned more?","ev"],["The last time she made a small mistake she could have hidden, what did she do about telling you?","re"]],
+ loyalty:[["In the last 90 days, when other men gave her attention in person or online, what did she actually do with it?","re"],["The last time someone tried to pull her attention away from you, how did it end?","re"]],
+ accountability:[["The last time you raised something she did wrong, what happened in that conversation?","re"],["In the last 30 days, when something she was responsible for went wrong, how did she handle the blame?","re"]],
+ personality:[["Over the last 30 days, on ordinary days with nothing planned, what was she like to be around?","fr"],["In the last 90 days, when plans fell apart or the day went sideways, what energy did she bring?","re"]],
+ caring:[["The last time you told her about a real problem, what did she do in the days after?","re"],["In the last 30 days, how often did she check on you or remember a detail that mattered to you, unprompted?","fr"]],
+ understanding:[["The last time you disagreed, was she able to state your side fairly before answering it?","re"],["In the last 90 days, when you explained something she did not like hearing, what did she do?","re"]],
+ gratitude:[["The last time you did something thoughtful for her, how was it received?","re"],["In the last 30 days, how did she talk about what she has versus what she does not?","fr"]],
+ femininity:[["Over the last 90 days, in relaxed settings with people she trusts, what was her default energy?","ob"],["The last time you were stressed, what did her presence do to the room?","re"]],
+ leadership:[["The last time you made a plan for a day out, what happened between announcing it and doing it?","re"],["In the last 90 days, when you made a decision she would not have chosen, how did she respond?","re"]],
+ respect:[["The last time she talked about you to her friends or family, what tone did she use?","re"],["In the last 90 days, when she disagreed with you in front of others, how did she handle it?","re"]],
+ peace:[["The last time she had a genuinely bad day — traffic, a bill, a disappointment — what happened at home?","re"],["In the last 90 days, when stress hit, how long did the storm usually last?","fr"]],
+ looks:[["On ordinary mornings, no makeup and no filter, how does she actually look day to day?","ob"],["Over the last 90 days, how much of her appearance held up in person versus in photos?","ob"]],
+ inshape:[["Over the last 90 days, what did her actual weekly habits look like — movement, food, sleep?","fr"],["In the last 30 days, how consistent was the effort she makes to take care of her body?","fr"]],
+ hwprop:[["Judging in person over the last 90 days, how proportioned is she for her own height?","ob"],["Over the last 90 days, has her proportion been moving toward balance, holding steady, or drifting away?","ob"]],
+ hygiene:[["On unplanned, ordinary days in the last 30 days, what were her hygiene and grooming like?","ob"],["What have her car, bathroom and everyday spaces actually looked like on normal visits?","ob"]],
+ cooking:[["In the last 30 days, when a meal at home was needed, what actually happened?","re"],["Over the last 90 days, what has she actually cooked, start to finish?","fr"]],
+ cleaning:[["On an unplanned visit in the last 90 days, what did her place actually look like?","ob"],["In the last 30 days, how did her space stay between cleanings — habit or scramble?","fr"]],
+ family:[["Over the last 90 days, how has she actually treated her own family when it cost her time?","fr"],["In the last 90 days, when the family future came up, did her actions match the talk?","re"]],
+ communication:[["Your last real disagreement — how did it actually end?","re"],["In the last 90 days, when an issue was raised, how often was it solved instead of just paused?","fr"]],
+ findisc:[["Over the last 90 days, what did her money behavior actually look like — bills, debt, impulse buys?","fr"],["The last time an unexpected expense hit her, what happened?","re"]],
+ consistency:[["Compare month one to the last 30 days: how much has she changed?","ob"],["In the last 90 days, how steady have her mood, effort and word been week to week?","fr"]],
+ values:[["In the last 90 days, when her stated values cost her something, what did she choose?","re"],["Over the last 90 days, how well did her daily life match the faith and values she claims?","fr"]],
+ sm_scroll:[["In the last 30 days, on a typical day, how much time did she lose to doom scrolling — scrolling with nothing to show for it?","fr"],["In the last 30 days, how was her phone handled in bed, at meals, and in the middle of a conversation?","ob"]],
+ sm_attention:[["In the last 90 days, how did she actually post — everyday life or business, or thirst-trap style posts aimed at getting men\u2019s attention and likes?","ob"],["In the last 90 days, when men liked, commented on, or DM\u2019d her posts with obvious interest, what did she actually do with that attention?","re"]]};
+var QRAW_HIM={
+ m_honesty:[["In the last 30 days, when a lie would have been easier than the truth, what did you actually do?","re"],["The last time you made a small mistake you could have hidden, did you tell it straight?","re"]],
+ m_accountability:[["The last time something you owned went wrong, what did you say first — your part, or the excuses?","re"],["In the last 30 days, when you were confronted about a fault, how did that conversation go?","re"]],
+ m_word:[["In the last 30 days, when you told someone you would do something, what actually happened?","ev"],["Think of your last three small promises. How many landed exactly as promised?","fr"]],
+ m_leadership:[["The last time a real decision sat on you, what did you do?","re"],["In the last 90 days, when you made a plan and it got pushback, how did you handle it?","re"]],
+ m_purpose:[["In the last 30 days, how many days got a real hour on your mission before distractions took over?","fr"],["Over the last 90 days, could someone watching your week name what you are building?","ob"]],
+ m_initiative:[["In the last 30 days, when you saw something that needed fixing, what did you do first?","re"],["Over the last 90 days, how many things did you start AND finish without being asked?","fr"]],
+ m_workethic:[["In the last 30 days, how many zero days — no real work toward providing — did you honestly have?","fr"],["Over the last 90 days, when work got hard or boring, what did you actually do?","re"]],
+ m_findisc:[["In the last 30 days, what did your money actually do — tracked and budgeted, or chaos?","fr"],["The last time you wanted something unplanned, what did you actually do?","re"]],
+ m_resourceful:[["The last problem that stopped you cold — what did you do next?","re"],["In the last 90 days, when something broke or fell through, how did you respond?","re"]],
+ m_inshape:[["In the last 30 days, how many training sessions actually happened?","fr"],["Over the last 90 days, how consistent has care of your body been — training, food, sleep?","fr"]],
+ m_protector:[["In the last 90 days, what have you actually done to be more capable of protecting your home?","fr"],["The last time a situation felt unsafe or tense, what did you do?","re"]],
+ m_emotional:[["The last time you were genuinely angry, what did the people around you experience?","re"],["In the last 90 days, under real pressure, how did you hold up?","fr"]],
+ m_discipline:[["In the last 30 days, how many mornings started at your set time with your routine done?","fr"],["Over the last 90 days, when motivation was gone, what did your standard do?","re"]],
+ m_order:[["Right now, unplanned: what does your home actually look like?","ob"],["In the last 30 days, how have your space and affairs stayed — ordered or chaotic?","fr"]],
+ m_hygiene:[["In the last 30 days, how consistent was your daily grooming — shower, teeth, nails, hair, clean clothes?","fr"],["On ordinary days, not occasions, how do you actually present?","ob"]],
+ m_communication:[["The last hard conversation you needed to have — what happened?","re"],["In the last 90 days, when something bothered you, how did you bring it up?","re"]],
+ m_caring:[["In the last 30 days, how often did you ask someone a real question and actually listen to the end?","fr"],["The last time someone close to you had a problem, what did you do in the days after?","re"]],
+ m_values:[["In the last 90 days, when your values cost you something, what did you choose?","re"],["Over the last 30 days, how well did your calendar and money match the values you claim?","fr"]],
+ m_sm_scroll:[["In the last 30 days, on a typical day, how much time did you lose to doom scrolling — scrolling with nothing to show for it?","fr"],["In the last 30 days, how was your phone handled in bed, at meals, and in the middle of a conversation?","ob"]],
+ m_sm_lust:[["In the last 30 days, how was your social media time actually used — for business, networking and building, or for entertainment and women\u2019s pages?","fr"],["In the last 90 days, how often did you like nearly every attractive woman\u2019s picture, follow thirst accounts, or slide into women\u2019s DMs?","re"]]};
+var CROSS_HER=[
+ {trait:"honesty",q:"One more angle: in the last 90 days, when she did not know a detail, did she admit it or fill the gap with a story?",set:"re"},
+ {trait:"loyalty",q:"One more angle: when an ex or an admirer reached out in the last 90 days, what happened?",set:"re"},
+ {trait:"accountability",q:"One more angle: the last time she owed an apology — how did it actually go?",set:"re"},
+ {trait:"consistency",q:"One more angle: is the woman of the last 30 days the same woman you first met?",set:"ob"},
+ {trait:"peace",q:"One more angle: the last time plans collapsed at the last minute, what was she like?",set:"re"},
+ {trait:"communication",q:"One more angle: after your last conflict, was anything actually different the next week?",set:"re"}];
+var CROSS_HIM=[
+ {trait:"m_honesty",q:"One more angle: in the last 90 days, when you did not know something, did you admit it or bluff?",set:"re"},
+ {trait:"m_word",q:"One more angle: your last promise to yourself — a start date, a quit date — what happened?",set:"ev"},
+ {trait:"m_accountability",q:"One more angle: the last apology you owed — how did it actually go?",set:"re"},
+ {trait:"m_emotional",q:"One more angle: the last time you got bad news or lost an argument around others, what did people see?",set:"re"},
+ {trait:"m_workethic",q:"One more angle: last week, honestly — how many days actually moved your providing forward?",set:"fr"},
+ {trait:"m_discipline",q:"One more angle: this past week, how many days ran on your standard instead of your mood?",set:"fr"}];
+function buildBank(mode){
+  var raw = mode==="her"?QRAW_HER:QRAW_HIM, sets = mode==="her"?SETS_HER:SETS_HIM, bank={}, qi=0;
+  Object.keys(raw).forEach(function(tid){
+    bank[tid]=raw[tid].map(function(pair){
+      var opts=sets[pair[1]].slice(); var shift=(qi*2)%opts.length; qi++;
+      var rot=opts.slice(shift).concat(opts.slice(0,shift));
+      return {q:pair[0], opts:rot.map(function(o){return {t:o[0], f:parseFloat(o[1])};})};
+    });
+  });
+  return bank;
+}
+var QBANK={her:buildBank("her"), him:buildBank("him")};
+var CROSSB={her:CROSS_HER, him:CROSS_HIM};
+var method={her:"quiz", him:"quiz"};
+function blankQuiz(){ return {step:0, answers:{}, cross:{}, tox:{}, db:{}, notes:{}, done:false, mismatch:[]}; }
+var QZ={her:blankQuiz(), him:blankQuiz()};
+var quizEls={};
+function crossForCat(mode,catIdx){ var out=[]; if(catIdx===3){out=[0,1];} if(catIdx===4){out=[2,3];} if(catIdx===5){out=[4,5];} return out.map(function(i){return {i:i, cc:CROSSB[mode][i]};}); }
+function setupQuizUI(mode){
+  var panel=$("panel-"+mode); var cards=panel.querySelectorAll(".card"); var main=cards[0];
+  var tog=document.createElement("div"); tog.className="methodtoggle"; tog.id=mode+"-methodtoggle";
+  tog.innerHTML="<button type='button' data-m='quiz' aria-pressed='true'>The Real Quiz</button><button type='button' data-m='quick' aria-pressed='false'>Quick Score (unverified)</button>";
+  var traitsEl=$(mode+"-traits"); main.insertBefore(tog, traitsEl);
+  var qz=document.createElement("div"); qz.id=mode+"-quiz"; main.insertBefore(qz, traitsEl);
+  var exbar=main.querySelector(".examplebar");
+  var subEl=main.querySelector(".sub");
+  quizEls[mode]={tog:tog, qz:qz, traits:traitsEl, exbar:exbar, toxCard:cards[1], dbCard:cards[2], subEl:subEl, subOrig:subEl?subEl.innerHTML:"", subQuiz:(mode==="her"?"Answer the questions about what you have actually seen — the system scores your answers, you do not pick a number. If you haven't seen it, choose <b>Haven't observed this</b> instead of guessing.":"Answer honestly about what you actually do — the system scores your answers, not your opinion of yourself.")};
+  tog.querySelectorAll("button").forEach(function(b){ b.addEventListener("click",function(){ setMethod(mode,b.getAttribute("data-m")); }); });
+  /* result extras */
+  if(mode==="her"){
+    var rev=document.createElement("div"); rev.id="answers-review"; rev.className="hidden";
+    $("action-block").parentNode.insertBefore(rev, $("action-block").nextSibling);
+    var cs=document.createElement("div"); cs.id="card-stamp"; $("card-zone").appendChild(cs);
+  }
+}
+function setMethod(mode,m){
+  method[mode]=m; stopSpeech();
+  var e=quizEls[mode]; if(!e) return;
+  e.tog.querySelectorAll("button").forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-m")===m?"true":"false"); });
+  var quiz = m==="quiz";
+  e.qz.style.display = quiz?"":"none";
+  e.traits.style.display = quiz?"none":"";
+  if(e.exbar) e.exbar.style.display = quiz?"none":"";
+  if(e.toxCard) e.toxCard.style.display = quiz?"none":"";
+  if(e.dbCard) e.dbCard.style.display = quiz?"none":"";
+  if(e.subEl) e.subEl.innerHTML = quiz ? e.subQuiz : e.subOrig;
+  if(quiz) buildQuizScreen(mode); else { render(mode); }
+  updateResultVis();
+}
+function updateResultVis(){
+  var res=$("result"); if(!res) return;
+  if((activeMode==="her"||activeMode==="him") && method[activeMode]==="quiz" && !QZ[activeMode].done) res.style.display="none";
+  else if(activeMode==="her"||activeMode==="him") res.style.display="";
+}
+function qSelectHTML(mode,qid,question,prefill){
+  var h="<div class='quizq'><p>"+esc(question.q)+"</p><select id='qz-"+qid+"' aria-label='Answer'><option value=''>Choose what actually happened…</option>";
+  question.opts.forEach(function(o){ h+="<option value='"+o.f+"'"+(String(prefill)===String(o.f)?" selected":"")+">"+esc(o.t)+"</option>"; });
+  if(mode==="her") h+="<option value='U'"+(prefill==="U"?" selected":"")+">Haven't observed this</option>";
+  return h+"</select></div>";
+}
+function buildQuizScreen(mode){
+  var z=QZ[mode], host=quizEls[mode].qz, c=cfg(mode);
+  if(z.step===0){
+    host.innerHTML="<h3>The Real Quiz</h3><p class='sub'>Answer what actually happens, not what should happen. No points are shown — the system scores your answers."+(mode==="her"?" Fill in her name and how long you have known her above, then start.":"")+"</p><div class='btnrow'><button class='btn' type='button' id='qz-start-"+mode+"'>"+(Object.keys(z.answers).length?"Continue the quiz":"Start the quiz")+"</button></div>";
+    $("qz-start-"+mode).addEventListener("click",function(){ z.step=1; buildQuizScreen(mode); host.scrollIntoView({behavior:"smooth",block:"start"}); });
+    return;
+  }
+  if(z.step>=1 && z.step<=c.cats.length){
+    var catIdx=z.step-1, cat=c.cats[catIdx];
+    var h="<div class='quizprog'>Category "+z.step+" of "+c.cats.length+" — "+esc(cat.name)+"</div><h3>"+esc(cat.name)+"</h3><p class='sub'>Every question needs an answer. Pick what actually happened — there are no points on this screen.</p>";
+    cat.traits.forEach(function(t){ QBANK[mode][t.id].forEach(function(q,qi){ h+=qSelectHTML(mode, t.id+"_"+qi, q, z.answers[t.id+"_"+qi]); }); });
+    crossForCat(mode,catIdx).forEach(function(x){ var sets=mode==="her"?SETS_HER:SETS_HIM; var qq={q:x.cc.q, opts:sets[x.cc.set].map(function(o){return {t:o[0], f:parseFloat(o[1])};})}; h+=qSelectHTML(mode, "cc"+x.i, qq, z.cross["cc"+x.i]); });
+    h+="<p class='quizerr' id='qz-err-"+mode+"'></p><div class='btnrow'><button class='btn' type='button' id='qz-submit-"+mode+"'>Submit category — see what your answers earned</button></div><div id='qz-reveal-"+mode+"'></div>";
+    host.innerHTML=h;
+    $("qz-submit-"+mode).addEventListener("click",function(){
+      var missing=false;
+      cat.traits.forEach(function(t){ for(var qi=0;qi<2;qi++){ var v=$("qz-"+t.id+"_"+qi).value; if(v==="") missing=true; else z.answers[t.id+"_"+qi]=v; } });
+      crossForCat(mode,catIdx).forEach(function(x){ var v=$("qz-cc"+x.i).value; if(v==="") missing=true; else z.cross["cc"+x.i]=v; });
+      if(missing){ $("qz-err-"+mode).textContent="Answer every question on this screen first — pick the closest honest answer."; return; }
+      $("qz-err-"+mode).textContent=""; revealCategory(mode,catIdx);
+    });
+    return;
+  }
+  if(z.step===8){
+    var h2="<div class='quizprog'>Reality Check</div><h3>Reality Check — the last 90 days</h3><p class='sub'>Frequencies, not impressions. Several times or more counts as the behavior being present.</p>";
+    c.tox.forEach(function(label,i){ h2+="<div class='quizq'><p>In the last 90 days, how often did this happen: "+esc(label)+"?</p><select id='qz-tox-"+mode+"-"+i+"'><option value=''>Choose a frequency…</option><option value='0'"+(z.tox[i]==="0"?" selected":"")+">Never</option><option value='0'"+(z.tox[i]==="0"?" selected":"")+">Once or twice</option><option value='1'"+(z.tox[i]==="1"?" selected":"")+">Several times</option><option value='1'"+(z.tox[i]==="1"?" selected":"")+">Regularly</option></select></div>"; });
+    h2+="<h3>Deal-breakers — straight yes or no</h3>";
+    c.db.forEach(function(label,i){ h2+="<div class='quizq'><p>Has this happened: "+esc(label)+"?</p><select id='qz-db-"+mode+"-"+i+"'><option value=''>Choose…</option><option value='0'"+(z.db[i]==="0"?" selected":"")+">No</option><option value='1'"+(z.db[i]==="1"?" selected":"")+">Yes</option></select></div>"; });
+    h2+="<p class='quizerr' id='qz-err-"+mode+"'></p><div class='btnrow'><button class='btn' type='button' id='qz-finish-"+mode+"'>See the full result</button></div>";
+    host.innerHTML=h2;
+    $("qz-finish-"+mode).addEventListener("click",function(){
+      var missing=false;
+      c.tox.forEach(function(_,i){ var sel=$("qz-tox-"+mode+"-"+i); var v=sel.value; if(v==="") missing=true; else z.tox[i]= (sel.selectedIndex>=3)?"1":"0"; });
+      c.db.forEach(function(_,i){ var v=$("qz-db-"+mode+"-"+i).value; if(v==="") missing=true; else z.db[i]=v; });
+      if(missing){ $("qz-err-"+mode).textContent="Answer every Reality Check question first."; return; }
+      finishQuiz(mode);
+    });
+    return;
+  }
+  host.innerHTML="<h3>Quiz complete</h3><p class='sub'>Your result is below — scored from your answers, not self-rated. You can review every answer under the result, or retake with your answers prefilled.</p><div class='btnrow'><button class='btn ghost' type='button' id='qz-retake-"+mode+"'>Retake (answers prefilled)</button></div>";
+  var rt=$("qz-retake-"+mode); if(rt) rt.addEventListener("click",function(){ z.done=false; z.step=1; buildQuizScreen(mode); });
+}
+function traitFromAnswers(mode,t){
+  var z=QZ[mode], a=z.answers[t.id+"_0"], b=z.answers[t.id+"_1"];
+  if(a===undefined||b===undefined) return {val:0, unobs:false, frac:0};
+  if(a==="U"&&b==="U") return {val:0, unobs:true, frac:0};
+  if(a==="U"){ var f=parseFloat(b); return {val:Math.round(f*t.max), unobs:false, frac:f}; }
+  if(b==="U"){ var f2=parseFloat(a); return {val:Math.round(f2*t.max), unobs:false, frac:f2}; }
+  var avg=(parseFloat(a)+parseFloat(b))/2;
+  return {val:Math.round(avg*t.max), unobs:false, frac:avg};
+}
+function revealCategory(mode,catIdx){
+  var c=cfg(mode), cat=c.cats[catIdx], host=$("qz-reveal-"+mode);
+  var totV=0, totM=0, rows="";
+  cat.traits.forEach(function(t){ var r=traitFromAnswers(mode,t); if(!r.unobs){ totV+=r.val; totM+=t.max; } var pct=r.unobs?null:Math.round(r.val/t.max*100);
+    rows+="<div class='catbar'><div class='cb-head'><span>"+esc(t.name)+(r.unobs?" — not observed, excluded":"")+"</span><span>"+(pct===null?"—":pct+"%")+"</span></div><div class='bar'><i class='"+(pct!==null&&pct<50?"weak":"")+"' style='width:"+(pct||0)+"%'></i></div></div>"+
+    "<div class='note-wrap'><label class='flabel' for='qz-note-"+t.id+"'>Evidence note for "+esc(t.name)+" (optional)</label><textarea id='qz-note-"+t.id+"' placeholder='One honest line of evidence…'>"+esc(QZ[mode].notes[t.id]||"")+"</textarea></div>";
+  });
+  var catPct=totM?Math.round(totV/totM*100):null;
+  host.innerHTML="<h3>"+esc(cat.name)+" — what your answers earned</h3><div class='catbar'><div class='cb-head'><span>Category</span><span>"+(catPct===null?"not scored":catPct+"%")+"</span></div><div class='bar'><i class='"+(catPct!==null&&catPct<50?"weak":"")+"' style='width:"+(catPct||0)+"%'></i></div></div>"+rows+
+   "<div class='btnrow'><button class='btn' type='button' id='qz-next-"+mode+"'>"+(catIdx===c.cats.length-1?"Go to the Reality Check":"Next category")+"</button></div>";
+  host.scrollIntoView({behavior:"smooth",block:"center"});
+  $("qz-next-"+mode).addEventListener("click",function(){
+    cat.traits.forEach(function(t){ var n=$("qz-note-"+t.id); if(n) QZ[mode].notes[t.id]=n.value; });
+    QZ[mode].step=catIdx+2; buildQuizScreen(mode); quizEls[mode].qz.scrollIntoView({behavior:"smooth",block:"start"});
+  });
+}
+function finishQuiz(mode){
+  var c=cfg(mode), z=QZ[mode], s=state[mode]; z.mismatch=[];
+  c.cats.forEach(function(cat){ cat.traits.forEach(function(t){ var r=traitFromAnswers(mode,t); s.values[t.id]=r.val; s.unobs[t.id]=r.unobs; if(s.unscored) s.unscored[t.id]=false; s.notes[t.id]=z.notes[t.id]||""; }); });
+  CROSSB[mode].forEach(function(cc,i){ var raw=z.cross["cc"+i]; if(raw===undefined||raw==="U") return; var cf=parseFloat(raw); var tb=traitById(c,cc.trait); if(!tb||s.unobs[cc.trait]) return; var earned=(s.values[cc.trait]||0)/tb.t.max; if(Math.abs(cf-earned)>=0.5){ var lower=Math.min(cf,earned); var nv=Math.round(lower*tb.t.max); z.mismatch.push({name:tb.t.name, earned:Math.round(earned*100), cross:Math.round(cf*100), droppedVal:nv, max:tb.t.max}); s.values[cc.trait]=nv; } });
+  c.tox.forEach(function(_,i){ s.tox[i]=z.tox[i]==="1"; var inp=document.querySelectorAll("#"+mode+"-tox input")[i]; if(inp) inp.checked=!!s.tox[i]; });
+  c.db.forEach(function(_,i){ s.db[i]=z.db[i]==="1"; var inp=document.querySelectorAll("#"+mode+"-db input")[i]; if(inp) inp.checked=!!s.db[i]; });
+  z.done=true; z.step=9; buildQuizScreen(mode); render(mode); buildReview(mode);
+  document.getElementById("result").scrollIntoView({behavior:"smooth"});
+}
+function buildReview(mode){
+  var host=$("answers-review"); if(!host) return;
+  if(method[mode]!=="quiz"||!QZ[mode].done){ host.classList.add("hidden"); host.innerHTML=""; return; }
+  var c=cfg(mode), z=QZ[mode], h="<h3>Your answers — read-only review</h3>";
+  allTraits(c).forEach(function(x){ QBANK[mode][x.t.id].forEach(function(q,qi){ var v=z.answers[x.t.id+"_"+qi]; var txt="Not answered"; if(v==="U") txt="Haven't observed this"; else if(v!==undefined){ q.opts.forEach(function(o){ if(String(o.f)===String(parseFloat(v))) txt=o.t; }); } h+="<p class='reviewq'><b>"+esc(x.t.name)+":</b> "+esc(q.q)+"<br/><span>Answer: "+esc(txt)+"</span></p>"; }); });
+  CROSSB[mode].forEach(function(cc,i){ var v=z.cross["cc"+i]; var sets=mode==="her"?SETS_HER:SETS_HIM; var txt="Not answered"; if(v!==undefined){ sets[cc.set].forEach(function(o){ if(String(parseFloat(o[1]))===String(parseFloat(v))) txt=o[0]; }); } h+="<p class='reviewq'><b>Extra question:</b> "+esc(cc.q)+"<br/><span>Answer: "+esc(txt)+"</span></p>"; });
+  if(z.mismatch.length) h+="<p class='reviewq'><span><b>Answers didn't line up</b> on: "+esc(z.mismatch.map(function(m){return m.name;}).join(", "))+" — those traits were scored on the lower answer.</span></p>";
+  host.innerHTML=h; host.classList.remove("hidden");
+}
+/* ---- wrap existing functions ---- */
+var _reasoningList=reasoningList;
+reasoningList=function(r){
+  var items=_reasoningList(r);
+  if(method[r.mode]==="quiz"&&QZ[r.mode].done){
+    items.splice(1,0,"<b>Method:</b> Scored from answers — not self-rated. The points came from what the answers described, never from a number the scorer picked.");
+    (QZ[r.mode].mismatch||[]).forEach(function(mm){ items.push("<b>Answers didn't line up — "+esc(mm.name)+":</b> the main answers implied "+mm.earned+"% but a later check question, asked in different words, implied "+mm.cross+"%. The trait dropped to the lower score ("+mm.droppedVal+"/"+mm.max+"). When the story changes with the wording, the system believes the lower one."); });
+  } else if(method[r.mode]==="quick"){
+    items.splice(1,0,"<b>Method:</b> Quick Score — unverified. These numbers were self-rated on sliders, not earned from answers.");
+  }
+  return items;
+};
+var _renderResult=renderResult;
+renderResult=function(r){
+  _renderResult(r);
+  var st=$("result-stamps"), cur=st.innerHTML;
+  if(method[r.mode]==="quick"){ if(cur.indexOf("UNVERIFIED")<0) st.innerHTML=cur+"<span class='stamp prov'>Quick Score — Unverified</span>"; }
+  else if(QZ[r.mode].done){ if(cur.indexOf("SCORED FROM ANSWERS")<0) st.innerHTML=cur+"<span class='stamp prov' style='border-color:var(--green);color:var(--green)'>Scored from Answers — Not Self-Rated</span>"; if((QZ[r.mode].mismatch||[]).length && cur.indexOf("didn't line up")<0) st.innerHTML+=" <span class='stamp'>Answers didn't line up</span>"; }
+  var cs=$("card-stamp"); if(cs){ if(method[r.mode]==="quick"){ cs.textContent="Quick Score — Unverified"; cs.className=""; cs.style.display="block"; } else if(QZ[r.mode].done){ cs.textContent="Scored from Answers"; cs.className="quiz"; cs.style.display="block"; } else cs.style.display="none"; }
+  if(resultMode===r.mode) buildReview(r.mode);
+  updateResultVis();
+};
+var _snapshot=snapshot;
+snapshot=function(mode){
+  var snap=_snapshot(mode);
+  snap.method=method[mode];
+  snap.quiz = method[mode]==="quiz" ? JSON.parse(JSON.stringify(QZ[mode])) : null;
+  return snap;
+};
+var _applyProfile=applyProfile;
+applyProfile=function(mode,p){
+  _applyProfile(mode,p);
+  if(p.method){ setMethod(mode,p.method); if(p.method==="quiz"&&p.quiz){ QZ[mode]=p.quiz; if(!QZ[mode].mismatch) QZ[mode].mismatch=[]; QZ[mode].step=9; buildQuizScreen(mode); buildReview(mode); render(mode); } }
+};
+var _renderSaved=renderSaved;
+renderSaved=function(){
+  _renderSaved();
+  try{ var store=loadStore(); ["her","him"].forEach(function(mode){ var items=$("saved-"+mode).querySelectorAll(".profile-item"); store[mode].forEach(function(p,i){ if(items[i]){ var b=document.createElement("p"); b.className="mutelist"; b.innerHTML = p.method==="quiz" ? "<b style='color:var(--green)'>SCORED FROM ANSWERS — NOT SELF-RATED</b>" : "<b style='color:var(--amber)'>QUICK SCORE — UNVERIFIED</b>"; items[i].appendChild(b); } }); }); }catch(e){}
+};
+var matchObs=new MutationObserver(function(){
+  var out=$("match-out"); if(!out||!out.innerHTML||out.getAttribute("data-stamped")==="1") return;
+  try{ var store=loadStore(); var h=store.her.filter(function(p){return p.id===$("match-her").value;})[0]; var m=store.him.filter(function(p){return p.id===$("match-him").value;})[0]; var notes=[]; if(h) notes.push((h.name||"Her")+": "+(h.method==="quiz"?"scored from answers":"QUICK SCORE — UNVERIFIED")); if(m) notes.push((m.name||"You")+": "+(m.method==="quiz"?"scored from answers":"QUICK SCORE — UNVERIFIED")); if(notes.length){ out.setAttribute("data-stamped","1"); out.innerHTML+="<p class='mutelist'><b>Method:</b> "+esc(notes.join(" · "))+"</p>"; } }catch(e){}
+});
+matchObs.observe($("match-out"),{childList:true});
+$("btn-match").addEventListener("click",function(){ $("match-out").removeAttribute("data-stamped"); });
+var _switchMode=switchMode;
+switchMode=function(m){ _switchMode(m); updateResultVis(); };
+setupQuizUI("her"); setupQuizUI("him");
+setMethod("her","quiz"); setMethod("him","quiz");
+updateResultVis();
+</script>
+
+<script>
+"use strict";
+/* ================= SOCIAL MEDIA UPDATE PANEL ================= */
+function socialIsUnscoredProfile(p,mode){
+  if(p.unscored && Object.keys(p.unscored).some(function(k){return p.unscored[k];})) return true;
+  var ids=SOCIAL_IDS[mode]||[];
+  return ids.some(function(sid){ return !p.values || !(sid in p.values); });
+}
+function showSocialUpdate(r){
+  var host=document.getElementById("social-update"); if(!host) return;
+  if(!r || !r.unscoredList || !r.unscoredList.length || !currentProfileId[r.mode]){ host.innerHTML=""; return; }
+  var mode=r.mode, c=cfg(mode);
+  var socialTraits=[]; c.cats.forEach(function(cat){ if(cat.name==="Social Media") cat.traits.forEach(function(tr){ if(r.unscoredList.some(function(x){return x.t.id===tr.id;})) socialTraits.push(tr); }); });
+  if(!socialTraits.length){ host.innerHTML=""; return; }
+  var h="<div class='card' style='margin:14px 0;padding:16px'><h3>Social Media — not scored yet</h3><p class='sub'>This profile was saved before the Social Media category was added. Social Media is excluded from its score — not counted as zero. Score it here to update the profile, then press <b>Save profile</b> to record a dated Social Media update in its history.</p>";
+  if(method[mode]==="quiz"){
+    socialTraits.forEach(function(tr){ QBANK[mode][tr.id].forEach(function(q,qi){
+      h+="<div class='quizq'><p>"+esc(q.q)+"</p><select id='su-"+tr.id+"_"+qi+"' aria-label='Social Media update answer'><option value=''>Choose what actually happened…</option>";
+      q.opts.forEach(function(o){ h+="<option value='"+o.f+"'>"+esc(o.t)+"</option>"; });
+      if(mode==="her") h+="<option value='U'>Haven't observed this</option>";
+      h+="</select></div>";
+    });});
+  } else {
+    socialTraits.forEach(function(tr){
+      h+="<div class='trait'><div class='trait-head'><span class='trait-name'>"+esc(tr.name)+"</span><span><span class='trait-max'>0–"+tr.max+"</span> <span class='trait-val' id='su-val-"+tr.id+"'>0</span></span></div><input type='range' min='0' max='"+tr.max+"' step='1' value='0' id='su-rng-"+tr.id+"' aria-label='"+esc(tr.name)+"' /><div class='anchor'>"+anchorFor(tr,0)+"</div></div>";
+    });
+  }
+  h+="<p class='quizerr' id='su-err'></p><div class='btnrow'><button class='btn' type='button' id='su-btn'>Score Social Media &amp; update this profile</button></div></div>";
+  host.innerHTML=h;
+  socialTraits.forEach(function(tr){ var rng=document.getElementById("su-rng-"+tr.id); if(rng) rng.addEventListener("input",function(){ var v=document.getElementById("su-val-"+tr.id); if(v) v.textContent=rng.value; }); });
+  document.getElementById("su-btn").addEventListener("click",function(){
+    var err=document.getElementById("su-err");
+    if(method[mode]==="quiz"){
+      var missing=false;
+      socialTraits.forEach(function(tr){ for(var qi=0;qi<2;qi++){ var sel=document.getElementById("su-"+tr.id+"_"+qi); if(!sel||sel.value==="") missing=true; } });
+      if(missing){ if(err) err.textContent="Answer all 4 Social Media questions first."; return; }
+      socialTraits.forEach(function(tr){ for(var qi=0;qi<2;qi++){ QZ[mode].answers[tr.id+"_"+qi]=document.getElementById("su-"+tr.id+"_"+qi).value; } var res=traitFromAnswers(mode,tr); state[mode].values[tr.id]=res.val; state[mode].unobs[tr.id]=res.unobs; state[mode].unscored[tr.id]=false; });
+    } else {
+      socialTraits.forEach(function(tr){ var rng=document.getElementById("su-rng-"+tr.id); state[mode].values[tr.id]=parseInt(rng?rng.value:"0",10)||0; state[mode].unscored[tr.id]=false; var mainRng=document.getElementById("rng-"+tr.id); if(mainRng) mainRng.value=state[mode].values[tr.id]; });
+    }
+    window.__socialJustUpdated[mode]=true;
+    render(mode);
+    var msg=document.getElementById("save-msg"); if(msg) msg.textContent="Social Media scored — updated score: "+lastResult[mode].final+"/100. Press Save profile to record a Social Media update in its history.";
+    host.scrollIntoView({behavior:"smooth",block:"center"});
+  });
+}
+var _renderResultSM=renderResult;
+renderResult=function(r){ _renderResultSM(r); try{ showSocialUpdate(r); }catch(e){} };
+var _renderSavedSM=renderSaved;
+renderSaved=function(){
+  _renderSavedSM();
+  try{ var store=loadStore(); ["her","him"].forEach(function(mode){ var items=document.getElementById("saved-"+mode).querySelectorAll(".profile-item"); store[mode].forEach(function(p,i){ if(items[i] && socialIsUnscoredProfile(p,mode)){ var b=document.createElement("p"); b.className="mutelist"; b.innerHTML="<b>Social Media — not scored yet</b> — open this profile to score the new category and update it."; items[i].appendChild(b); } }); }); }catch(e){}
+};
+var _applyProfileSM=applyProfile;
+applyProfile=function(mode,p){
+  _applyProfileSM(mode,p);
+  try{
+    if(!p.method){ setMethod(mode,"quick"); }
+    if(p.unscored===undefined && (!p.values || SOCIAL_IDS[mode].some(function(sid){return !(sid in p.values);}))) { /* migration already marked unscored in core applyProfile */ }
+    render(mode);
+  }catch(e){}
+};
+/* re-render saved so seeded/legacy labels show on load */
+try{ renderSaved(); render(resultMode==="him"?"him":"her"); }catch(e){}
+</script>
+<style>
+.savedjump{flex:1 1 auto;min-width:120px;padding:12px 10px;border:1px solid var(--gold);background:transparent;color:var(--gold2);border-radius:999px;font-weight:800;cursor:pointer;min-height:48px}
+.savefb{margin:2px 0 10px;font-weight:700;min-height:1.2em}
+.savefb.ok{color:var(--green)}
+.savefb.err{color:var(--red)}
+.savefb .linklike{background:none;border:none;color:var(--gold2);text-decoration:underline;cursor:pointer;font:inherit;font-weight:800;padding:4px 2px;min-height:36px}
+#saved-profiles-anchor{scroll-margin-top:90px}
+</style>
+<script>
+"use strict";
+/* ================= SAVED PROFILES NAV + SAVE FEEDBACK ================= */
+/* Top shortcut + Actions shortcut with a live count; the Save button itself
+   reports Saving / Saved / why-not, at the button — no silent saves. */
+function savedTotalCount(){ try{ var s=loadStore(); return (s.her?s.her.length:0)+(s.him?s.him.length:0); }catch(e){ return 0; } }
+function updateSavedCounts(){
+  var n=savedTotalCount();
+  var t=$("btn-saved-top"); if(t) t.textContent="Saved Profiles ("+n+")";
+  var a=$("btn-saved-actions"); if(a) a.textContent="Saved Profiles ("+n+")";
+}
+function goSavedProfiles(){
+  switchMode("saved");
+  setTimeout(function(){ var el=$("saved-profiles-anchor"); if(el) el.scrollIntoView({behavior:"smooth",block:"start"}); },80);
+}
+(function(){
+  var t=$("btn-saved-top"); if(t) t.addEventListener("click",goSavedProfiles);
+  var a=$("btn-saved-actions"); if(a) a.addEventListener("click",goSavedProfiles);
+})();
+/* empty state: say where saving happens */
+var _renderSavedNav=renderSaved;
+renderSaved=function(){
+  _renderSavedNav();
+  try{
+    var store=loadStore();
+    ["her","him"].forEach(function(mode){
+      if(!store[mode].length){
+        var host=$("saved-"+mode);
+        if(host) host.innerHTML="<p class='mutelist'>No saved profiles yet. After a result, tap <b>Save profile</b> in the Actions section under the verdict — the profile lands here, and the count on the Saved Profiles button at the top goes up.</p>";
+      }
+    });
+  }catch(e){}
+  updateSavedCounts();
+};
+/* save button: dynamic label (Save profile / Save re-score) */
+var saveBusy=false;
+function saveBtnLabel(){ return currentProfileId[resultMode] ? "Save re-score" : "Save profile"; }
+function refreshSaveLabel(){ var b=$("btn-save"); if(b && !saveBusy) b.textContent=saveBtnLabel(); }
+var _renderResultNav=renderResult;
+renderResult=function(r){ _renderResultNav(r); refreshSaveLabel(); };
+var _applyProfileNav=applyProfile;
+applyProfile=function(mode,p){ _applyProfileNav(mode,p); refreshSaveLabel(); clearSaveFeedback(); };
+function setSaveFeedback(html,cls){
+  var fb=$("save-feedback"); if(!fb) return;
+  fb.className="savefb "+(cls||""); fb.innerHTML=html||"";
+}
+function clearSaveFeedback(){ setSaveFeedback("",""); }
+/* Replace the core save handler (clone strips its listener) with one that
+   gives feedback at the button: Saving… → ✓ Saved / reason it failed. */
+(function(){
+  var old=$("btn-save"); if(!old) return;
+  var btn=old.cloneNode(true); old.parentNode.replaceChild(btn,old);
+  btn.addEventListener("click",function(){
+    if(saveBusy) return;
+    var mode=resultMode;
+    var nameEl = mode==="her" ? $("her-name") : $("him-name");
+    var name = nameEl ? (nameEl.value||"").trim() : "";
+    if(mode==="her" && !name){
+      setSaveFeedback("Add her name at the top first, then save. <button type='button' class='linklike' id='savefb-name-link'>Go to her name</button>","err");
+      var link=$("savefb-name-link");
+      if(link) link.addEventListener("click",function(){
+        nameEl.scrollIntoView({behavior:"smooth",block:"center"});
+        setTimeout(function(){ try{ nameEl.focus({preventScroll:true}); }catch(e){ nameEl.focus(); } },400);
+      });
+      return;
+    }
+    saveBusy=true; btn.disabled=true; btn.textContent="Saving…"; setSaveFeedback("","");
+    setTimeout(function(){
+      try{
+        var store=loadStore(); var snap=snapshot(mode);
+        var existing=null; store[mode].forEach(function(p){ if(p.id===snap.id) existing=p; });
+        var isRescore=!!existing;
+        var entry={date:new Date().toISOString().slice(0,10), base:snap.base, final:snap.final};
+        if(window.__socialJustUpdated && window.__socialJustUpdated[mode]){ entry.note="Social Media update"; window.__socialJustUpdated[mode]=false; }
+        if(existing){ snap.history=existing.history.concat([entry]); store[mode][store[mode].indexOf(existing)]=snap; }
+        else { snap.history=[entry]; store[mode].push(snap); currentProfileId[mode]=snap.id; }
+        saveStore(store);
+        renderSaved();
+        var msg=$("save-msg");
+        if(msg) msg.textContent="Saved on this device — "+(snap.name||(mode==="her"?"Her profile":"Your profile"))+" at "+snap.final+"/100, "+snap.history.length+" score entr"+(snap.history.length===1?"y":"ies")+" in its history.";
+        var okText = isRescore ? "✓ Re-score saved" : (mode==="her" ? "✓ Saved — she's in Saved Profiles below" : "✓ Saved — your profile is in Saved Profiles below");
+        setSaveFeedback(esc(okText)+" <button type='button' class='linklike' id='savefb-view-link'>View Saved Profiles</button>","ok");
+        var vl=$("savefb-view-link"); if(vl) vl.addEventListener("click",goSavedProfiles);
+      }catch(e){
+        setSaveFeedback("Save didn't go through — this browser blocked storage, so nothing was saved. Free up space or leave private mode, then tap Save again.","err");
+      }
+      saveBusy=false; btn.disabled=false; btn.textContent=saveBtnLabel();
+    },350);
+  });
+})();
+renderSaved();
+updateSavedCounts();
+refreshSaveLabel();
+</script>
+<style>
+.draftbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;border:1px dashed var(--gold);border-radius:12px;padding:10px 12px;margin:12px 0;background:var(--card2)}
+.draftbar .draftbar-note{color:var(--muted);font-size:.88rem;flex:1 1 200px}
+.draft-save-btn.draft-err{border-color:var(--red)!important;color:var(--red)!important}
+#drafts-anchor{scroll-margin-top:90px}
+</style>
+<script>
+"use strict";
+/* ================= SAVE-AT-ANY-TIME DRAFTS ================= */
+/* Drafts live in their own localStorage key — profiles storage is untouched.
+   A draft captures the full in-progress state (quiz answers incl. the
+   unsubmitted selections on the current screen, or every Quick Score
+   control) so scoring can stop anywhere and resume exactly there. */
+var DRAFTS_KEY="wws-public-drafts-v1";
+var activeDraftId={her:null,him:null};
+var draftBusy=false;
+function loadDrafts(){ try{ var d=JSON.parse(localStorage.getItem(DRAFTS_KEY)||"null"); if(d&&d.her&&d.him) return d; }catch(e){} return {her:[],him:[]}; }
+function saveDraftsStore(d){ localStorage.setItem(DRAFTS_KEY,JSON.stringify(d)); }
+function deepCopy(o){ return JSON.parse(JSON.stringify(o||{})); }
+function draftLabel(d){ return (d.name&&d.name.trim())? d.name.trim() : "Unnamed draft"; }
+function draftMethodLabel(d){ return d.method==="quiz" ? "Real Quiz" : "Quick Score"; }
+function draftModeLabel(d){ return d.mode==="her" ? "Her" : "Mirror"; }
+function draftProgress(d){
+  var c=cfg(d.mode);
+  if(d.method==="quiz"){
+    var z=d.quiz||blankQuiz(), done=0;
+    c.cats.forEach(function(cat){ var ok=cat.traits.every(function(t){ return z.answers[t.id+"_0"]!==undefined && z.answers[t.id+"_1"]!==undefined; }); if(ok) done++; });
+    if(z.done) done=c.cats.length;
+    return done+" of "+c.cats.length+" categories done";
+  }
+  var s=d.state||{values:{},unobs:{},notes:{},unscored:{}}; var touched=0; var all=allTraits(c);
+  all.forEach(function(x){ var t=x.t; var v=(s.values&&s.values[t.id])||0;
+    var isSocial=SOCIAL_IDS[d.mode].indexOf(t.id)>=0;
+    var hit = v>0 || !!(s.unobs&&s.unobs[t.id]) || (((s.notes&&s.notes[t.id])||"").trim().length>0) || (isSocial && s.unscored && s.unscored[t.id]===false);
+    if(hit) touched++;
+  });
+  return touched+" of "+all.length+" traits touched";
+}
+/* Harvest what is on the current quiz screen but not yet submitted:
+   category selects, Reality Check selects (by index — two options share a
+   value), and evidence notes sitting in a scored category's reveal panel. */
+function harvestPending(mode){
+  var p={selects:{},notes:{},revealCat:null};
+  var z=QZ[mode], host=quizEls[mode]&&quizEls[mode].qz, c=cfg(mode);
+  if(!host) return p;
+  function grabSelects(){ host.querySelectorAll("select[id^='qz-']").forEach(function(sel){ p.selects[sel.id]={v:sel.value,i:sel.selectedIndex}; }); }
+  if(z.step>=1 && z.step<=c.cats.length){
+    grabSelects();
+    var rev=$("qz-reveal-"+mode);
+    if(rev && rev.querySelector("#qz-next-"+mode)){
+      p.revealCat=z.step-1;
+      rev.querySelectorAll("textarea[id^='qz-note-']").forEach(function(ta){ p.notes[ta.id]=ta.value; });
+    }
+  } else if(z.step===8){ grabSelects(); }
+  return p;
+}
+function collectDraft(mode){
+  return {
+    id: activeDraftId[mode] || ("d"+Date.now()),
+    mode: mode,
+    method: method[mode],
+    name: (mode==="her"? $("her-name").value : $("him-name").value)||"",
+    known: mode==="her"? $("her-known").value : "",
+    height: mode==="her"? $("her-height").value : "",
+    weight: mode==="her"? $("her-weight").value : "",
+    savedAt: new Date().toISOString(),
+    profileId: currentProfileId[mode]||null,
+    state: deepCopy(state[mode]),
+    quiz: deepCopy(QZ[mode]),
+    pending: method[mode]==="quiz" ? harvestPending(mode) : null
+  };
+}
+function doSaveDraft(mode,btn){
+  if(draftBusy) return;
+  if(!btn.dataset.label) btn.dataset.label=btn.textContent;
+  draftBusy=true; btn.disabled=true; btn.classList.remove("draft-err"); btn.textContent="Saving…";
+  setTimeout(function(){
+    var ok=false;
+    try{
+      var d=collectDraft(mode);
+      var store=loadDrafts();
+      var idx=-1; store[mode].forEach(function(x,i){ if(x.id===d.id) idx=i; });
+      if(idx>=0) store[mode][idx]=d; else store[mode].push(d);
+      saveDraftsStore(store);
+      activeDraftId[mode]=d.id;
+      ok=true;
+      renderDrafts();
+    }catch(e){ ok=false; }
+    draftBusy=false; btn.disabled=false;
+    if(ok){
+      btn.textContent="✓ Draft saved — find it under Drafts below";
+    } else {
+      btn.classList.add("draft-err");
+      btn.textContent="Couldn't save — this browser blocked storage. Leave private mode or free up space, then tap again.";
+    }
+    setTimeout(function(){ if(document.contains(btn)){ btn.textContent=btn.dataset.label; btn.classList.remove("draft-err"); } },3200);
+  },300);
+}
+document.addEventListener("click",function(e){
+  var b=e.target&&e.target.closest? e.target.closest(".draft-save-btn") : null;
+  if(!b) return;
+  doSaveDraft(b.getAttribute("data-mode")||resultMode, b);
+});
+/* ---- draft buttons: persistent bar under identity, Actions row, quiz footers ---- */
+["her","him"].forEach(function(mode){
+  var tog=quizEls[mode]&&quizEls[mode].tog; if(!tog) return;
+  var bar=document.createElement("div"); bar.className="draftbar"; bar.id=mode+"-draftbar";
+  bar.innerHTML="<button type='button' class='btn ghost draft-save-btn' data-mode='"+mode+"'>Save draft — finish later</button><span class='draftbar-note'>Stop anywhere — even mid-category — and pick up right where you left off. Drafts live under <b>Drafts</b>, above Saved Profiles.</span>";
+  tog.parentNode.insertBefore(bar,tog);
+});
+(function(){
+  var saveBtn=$("btn-save"); if(!saveBtn) return;
+  var b=document.createElement("button"); b.type="button"; b.className="btn ghost draft-save-btn"; b.id="btn-draft-actions"; b.textContent="Save draft — finish later";
+  saveBtn.parentNode.appendChild(b);
+})();
+function injectQuizDraftButtons(mode){
+  var host=quizEls[mode]&&quizEls[mode].qz; if(!host) return;
+  host.querySelectorAll(".btnrow").forEach(function(row){
+    if(row.querySelector(".draft-save-btn")) return;
+    var b=document.createElement("button"); b.type="button"; b.className="btn ghost draft-save-btn"; b.setAttribute("data-mode",mode); b.textContent="Save draft — finish later";
+    row.appendChild(b);
+  });
+}
+var _buildQuizScreenDrafts=buildQuizScreen;
+buildQuizScreen=function(mode){ _buildQuizScreenDrafts(mode); injectQuizDraftButtons(mode); };
+var _revealCategoryDrafts=revealCategory;
+revealCategory=function(mode,catIdx){
+  _revealCategoryDrafts(mode,catIdx);
+  var rev=$("qz-reveal-"+mode); if(!rev) return;
+  var row=rev.querySelector(".btnrow");
+  if(row && !row.querySelector(".draft-save-btn")){
+    var b=document.createElement("button"); b.type="button"; b.className="btn ghost draft-save-btn"; b.setAttribute("data-mode",mode); b.textContent="Save draft — finish later";
+    row.appendChild(b);
+  }
+};
+/* ---- Drafts section, directly above Saved Profiles ---- */
+(function(){
+  var anchor=$("saved-profiles-anchor"); if(!anchor) return;
+  var card=document.createElement("div"); card.className="card"; card.id="drafts-anchor";
+  card.innerHTML="<h2>Drafts</h2><p class='sub'>Unfinished scoring, saved on this device only. Continue a draft to pick up exactly where you stopped — drafts are not finished profiles and never count in Saved Profiles.</p><div id='drafts-list'></div>";
+  anchor.parentNode.insertBefore(card,anchor);
+})();
+function renderDrafts(){
+  var host=$("drafts-list"); if(!host) return;
+  var store=loadDrafts();
+  var all=store.her.concat(store.him).slice().sort(function(a,b){ return (b.savedAt||"")<(a.savedAt||"")?-1:1; });
+  if(!all.length){ host.innerHTML="<p class='mutelist'>No drafts yet. While scoring — quiz or Quick Score — tap <b>Save draft — finish later</b> any time and your progress lands here, name or no name.</p>"; return; }
+  host.innerHTML="";
+  all.forEach(function(d){
+    var div=document.createElement("div"); div.className="profile-item";
+    div.innerHTML="<div class='pi-head'><b>"+esc(draftLabel(d))+"</b><span class='mutelist'>Saved "+esc((d.savedAt||"").slice(0,10))+"</span></div>"+
+      "<p class='mutelist' style='margin:4px 0'>"+esc(draftModeLabel(d))+" · "+esc(draftMethodLabel(d))+" · "+esc(draftProgress(d))+"</p>"+
+      "<div class='btnrow' style='margin:8px 0 0'><button class='btn small' data-dact='continue'>Continue</button><button class='btn small danger' data-dact='del'>Delete draft</button></div>";
+    div.querySelectorAll("button").forEach(function(b){ b.addEventListener("click",function(){
+      if(b.getAttribute("data-dact")==="continue") restoreDraft(d);
+      else { deleteDraftById(d.mode,d.id); if(activeDraftId[d.mode]===d.id) activeDraftId[d.mode]=null; renderDrafts(); }
+    });});
+    host.appendChild(div);
+  });
+}
+function deleteDraftById(mode,id){
+  try{ var store=loadDrafts(); store[mode]=store[mode].filter(function(x){return x.id!==id;}); saveDraftsStore(store); }catch(e){}
+}
+function applyPending(mode,d){
+  var p=d.pending; if(!p) return;
+  if(p.selects){ Object.keys(p.selects).forEach(function(id){ var el=$(id); if(!el) return; var rec=p.selects[id];
+    if(rec&&typeof rec==="object"){ if(typeof rec.i==="number" && el.options[rec.i] && el.options[rec.i].value===String(rec.v)) el.selectedIndex=rec.i; else el.value=rec.v; }
+    else el.value=rec;
+  }); }
+  if(p.revealCat!==null && p.revealCat!==undefined){
+    revealCategory(mode,p.revealCat);
+    if(p.notes) Object.keys(p.notes).forEach(function(id){ var ta=$(id); if(ta) ta.value=p.notes[id]; });
+  }
+}
+function restoreDraft(d){
+  var mode=d.mode;
+  stopSpeech();
+  var s=blankState(cfg(mode)), snap=d.state||{};
+  ["values","unobs","notes","tox","db","unscored"].forEach(function(k){ if(snap[k]) Object.keys(snap[k]).forEach(function(id){ if(k==="values"||k==="unscored"){ if(id in s[k]) s[k][id]=snap[k][id]; } else s[k][id]=snap[k][id]; }); });
+  state[mode]=s;
+  var z=blankQuiz(), qz=d.quiz||{};
+  ["answers","cross","tox","db","notes"].forEach(function(k){ if(qz[k]) z[k]=deepCopy(qz[k]); });
+  if(typeof qz.step==="number") z.step=qz.step;
+  z.done=!!qz.done; z.mismatch=qz.mismatch? deepCopy(qz.mismatch):[];
+  QZ[mode]=z;
+  currentProfileId[mode]=d.profileId||null;
+  activeDraftId[mode]=d.id;
+  if(mode==="her"){ $("her-name").value=d.name||""; $("her-height").value=d.height||""; $("her-weight").value=d.weight||""; if(d.known) $("her-known").value=d.known; }
+  else $("him-name").value=d.name||"";
+  cfg(mode).cats.forEach(function(cat){ cat.traits.forEach(function(t){
+    var r=$("rng-"+t.id); if(r) r.value=state[mode].values[t.id]||0;
+    var u=$("unobs-"+t.id); if(u) u.checked=!!state[mode].unobs[t.id];
+    var n=$("note-"+t.id); if(n) n.value=state[mode].notes[t.id]||"";
+  });});
+  document.querySelectorAll("#"+mode+"-tox input").forEach(function(inp){ inp.checked=!!state[mode].tox[inp.getAttribute("data-tox")]; });
+  document.querySelectorAll("#"+mode+"-db input").forEach(function(inp){ inp.checked=!!state[mode].db[inp.getAttribute("data-db")]; });
+  switchMode(mode);
+  setMethod(mode,d.method);
+  if(d.method==="quiz"){
+    applyPending(mode,d);
+    if(QZ[mode].done){ render(mode); }
+  } else {
+    render(mode);
+  }
+  refreshSaveLabel();
+}
+/* keep drafts list fresh wherever profiles re-render */
+var _renderSavedDrafts=renderSaved;
+renderSaved=function(){ _renderSavedDrafts(); renderDrafts(); };
+/* opening a profile or loading an example/reset starts fresh work — it no
+   longer belongs to any loaded draft */
+var _applyProfileDrafts=applyProfile;
+applyProfile=function(mode,p){ _applyProfileDrafts(mode,p); activeDraftId[mode]=null; };
+var _setScoresDrafts=setScores;
+setScores=function(mode,map){ _setScoresDrafts(mode,map); activeDraftId[mode]=null; };
+/* finishing a continued draft through Save profile removes that draft */
+var pendingSaveDraftMode=null;
+document.addEventListener("click",function(e){ if(e.target&&e.target.id==="btn-save") pendingSaveDraftMode=resultMode; });
+var saveFbEl=$("save-feedback");
+if(saveFbEl && window.MutationObserver){
+  new MutationObserver(function(){
+    var cls=saveFbEl.className||"";
+    if(cls.indexOf("ok")>=0 && pendingSaveDraftMode){
+      var m=pendingSaveDraftMode; pendingSaveDraftMode=null;
+      if(activeDraftId[m]){ deleteDraftById(m,activeDraftId[m]); activeDraftId[m]=null; renderDrafts(); }
+    } else if(cls.indexOf("err")>=0){ pendingSaveDraftMode=null; }
+  }).observe(saveFbEl,{attributes:true,attributeFilter:["class"],childList:true});
+}
+injectQuizDraftButtons("her");
+injectQuizDraftButtons("him");
+renderDrafts();
+</script>
+<script>
+"use strict";
+/* ================= RESULT VISIBILITY — ROOT-CAUSE FIX ================= */
+/* Bug: activeMode was declared once ("her") and never updated by
+   switchMode, so updateResultVis always judged visibility against Her —
+   a finished Mirror quiz stayed hidden until Her's method toggle was
+   flipped to Quick, and a Quick-mode result leaked onto the Saved tab.
+   Fix: activeMode now tracks the view the user is actually on (updated
+   before and after every switchMode call), and visibility is decided
+   purely from live state: the viewed mode, the mode that produced the
+   current result (resultMode), that mode's method, and whether its
+   quiz is done. The fixed checker replaces the global updateResultVis,
+   so every existing caller — mode switch, method switch, tab switch,
+   quiz completion, profile load, draft restore — gets the corrected
+   decision with no toggle-flipping required. */
+function fixedResultVis(){
+  var res=$("result"); if(!res) return;
+  var viewing=activeMode;
+  if(viewing!=="her" && viewing!=="him"){ res.style.display="none"; return; }
+  if(resultMode!==viewing){ res.style.display="none"; return; }
+  if(method[viewing]==="quiz" && !(QZ[viewing] && QZ[viewing].done)){ res.style.display="none"; return; }
+  res.style.display="";
+}
+updateResultVis=fixedResultVis;
+var _switchModeVisFix=switchMode;
+switchMode=function(m){
+  activeMode=m;
+  _switchModeVisFix(m);
+  activeMode=m;
+  fixedResultVis();
+};
+var _setMethodVisFix=setMethod;
+setMethod=function(mode,m){ _setMethodVisFix(mode,m); fixedResultVis(); };
+var _renderResultVisFix=renderResult;
+renderResult=function(r){ _renderResultVisFix(r); fixedResultVis(); };
+var _finishQuizVisFix=finishQuiz;
+finishQuiz=function(mode){ _finishQuizVisFix(mode); fixedResultVis(); };
+var _buildQuizScreenVisFix=buildQuizScreen;
+buildQuizScreen=function(mode){ _buildQuizScreenVisFix(mode); fixedResultVis(); };
+var _applyProfileVisFix2=applyProfile;
+applyProfile=function(mode,p){ _applyProfileVisFix2(mode,p); activeMode=mode; fixedResultVis(); };
+if(typeof restoreDraft==="function"){
+  var _restoreDraftVisFix=restoreDraft;
+  restoreDraft=function(d){ _restoreDraftVisFix(d); if(d&&d.mode) activeMode=d.mode; fixedResultVis(); };
+}
+fixedResultVis();
+</script>
+<script>
+/* WWS-UPDATER:BEGIN (injected by scripts/inject-updater.js — do not edit by hand)
+ * Live web-bundle updater for The Whole Woman Score.
+ *
+ * Once per launch (a few seconds after load, in the background) it fetches a
+ * small JSON manifest from the update channel:
+ *   https://raw.githubusercontent.com/ToooMuchMoxie/whole-woman-score-updates/main/manifest.json
+ * Manifest shape: { "version": "1.1.0", "bundleUrl": "<zip url>", "sha256": "<hex>" }
+ *
+ * If the manifest version is newer than this bundle's version, it downloads
+ * the bundle zip, verifies its SHA-256, extracts index.html, sanity-checks
+ * it, and stages it in localStorage ("wws.stage.v1"). The boot loader
+ * (web/index.html) runs the staged bundle on the NEXT launch. Every failure
+ * is silent: the app keeps running the current bundle, and user data
+ * (profiles/drafts in localStorage) is never touched.
+ */
+window.__WWS_BUNDLE_VERSION__ = "1.0.0";
+(function () {
+  var MANIFEST_URL = "https://raw.githubusercontent.com/ToooMuchMoxie/whole-woman-score-updates/main/manifest.json";
+  var STAGE_KEY = "wws.stage.v1";
+
+  function parseV(v) {
+    return String(v || "0.0.0").split(".").map(function (n) {
+      var x = parseInt(n, 10);
+      return isNaN(x) ? 0 : x;
+    });
+  }
+  function semverGt(a, b) {
+    var pa = parseV(a), pb = parseV(b), i, d;
+    for (i = 0; i < 3; i++) {
+      d = (pa[i] || 0) - (pb[i] || 0);
+      if (d !== 0) return d > 0;
+    }
+    return false;
+  }
+  function bufToHex(buf) {
+    var bytes = new Uint8Array(buf), out = "", i, h;
+    for (i = 0; i < bytes.length; i++) {
+      h = bytes[i].toString(16);
+      out += h.length === 1 ? "0" + h : h;
+    }
+    return out;
+  }
+  function sha256Hex(arrayBuffer) {
+    return crypto.subtle.digest("SHA-256", arrayBuffer).then(bufToHex);
+  }
+
+  /* Minimal ZIP reader: supports stored (0) and deflated (8) entries, which
+   * is all a bundle produced by `zip` / the channel workflow contains.
+   * Returns a promise of { entryName: Uint8Array }. */
+  function unzip(bytes) {
+    var dv = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+    var len = bytes.length;
+    // Find End Of Central Directory (scan the trailing window for its signature).
+    var eocd = -1, i, sig;
+    var start = Math.max(0, len - 65558);
+    for (i = len - 22; i >= start; i--) {
+      if (dv.getUint32(i, true) === 0x06054b50) { eocd = i; break; }
+    }
+    if (eocd < 0) return Promise.reject(new Error("no eocd"));
+    var count = dv.getUint16(eocd + 10, true);
+    var cdOff = dv.getUint32(eocd + 16, true);
+    var entries = [];
+    var p = cdOff;
+    for (i = 0; i < count; i++) {
+      if (dv.getUint32(p, true) !== 0x02014b50) return Promise.reject(new Error("bad cd"));
+      var method = dv.getUint16(p + 10, true);
+      var compSize = dv.getUint32(p + 20, true);
+      var nameLen = dv.getUint16(p + 28, true);
+      var extraLen = dv.getUint16(p + 30, true);
+      var commentLen = dv.getUint16(p + 32, true);
+      var localOff = dv.getUint32(p + 42, true);
+      var name = new TextDecoder("utf-8").decode(bytes.subarray(p + 46, p + 46 + nameLen));
+      entries.push({ name: name, method: method, compSize: compSize, localOff: localOff });
+      p += 46 + nameLen + extraLen + commentLen;
+    }
+    var out = {};
+    var chain = Promise.resolve();
+    entries.forEach(function (en) {
+      chain = chain.then(function () {
+        if (dv.getUint32(en.localOff, true) !== 0x04034b50) throw new Error("bad local header");
+        var nLen = dv.getUint16(en.localOff + 26, true);
+        var eLen = dv.getUint16(en.localOff + 28, true);
+        var dataStart = en.localOff + 30 + nLen + eLen;
+        var comp = bytes.subarray(dataStart, dataStart + en.compSize);
+        if (en.method === 0) {
+          out[en.name] = comp;
+          return null;
+        }
+        if (en.method === 8) {
+          if (typeof DecompressionStream === "undefined") throw new Error("no DecompressionStream");
+          var stream = new Blob([comp]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
+          return new Response(stream).arrayBuffer().then(function (ab) {
+            out[en.name] = new Uint8Array(ab);
+          });
+        }
+        throw new Error("unsupported zip method " + en.method);
+      });
+    });
+    return chain.then(function () { return out; });
+  }
+
+  function checkForUpdate() {
+    var current = window.__WWS_BUNDLE_VERSION__;
+    fetch(MANIFEST_URL + "?t=" + Date.now(), { cache: "no-store" })
+      .then(function (res) { if (!res.ok) throw new Error("manifest " + res.status); return res.json(); })
+      .then(function (m) {
+        if (!m || !m.version || !m.bundleUrl || !m.sha256) throw new Error("bad manifest");
+        if (!semverGt(m.version, current)) return null; // already current
+        var staged = null;
+        try { staged = JSON.parse(window.localStorage.getItem(STAGE_KEY) || "null"); } catch (e) {}
+        if (staged && !semverGt(m.version, staged.version)) return null; // already staged
+        return fetch(m.bundleUrl, { cache: "no-store" })
+          .then(function (res) { if (!res.ok) throw new Error("bundle " + res.status); return res.arrayBuffer(); })
+          .then(function (zipBuf) {
+            return sha256Hex(zipBuf).then(function (hex) {
+              if (hex.toLowerCase() !== String(m.sha256).toLowerCase()) throw new Error("sha mismatch");
+              return unzip(new Uint8Array(zipBuf));
+            });
+          })
+          .then(function (files) {
+            var htmlBytes = files["index.html"];
+            if (!htmlBytes) throw new Error("bundle missing index.html");
+            var html = new TextDecoder("utf-8").decode(htmlBytes);
+            if (html.indexOf("The Whole Woman Score") === -1) throw new Error("bundle sanity check failed");
+            window.localStorage.setItem(STAGE_KEY, JSON.stringify({ version: m.version, html: html }));
+            window.__WWS_STAGED_VERSION__ = m.version; // for diagnostics/support
+          });
+      })
+      .catch(function () { /* silent: keep running the current bundle */ });
+  }
+
+  if (typeof window !== "undefined" && window.addEventListener) {
+    if (document.readyState === "complete") {
+      setTimeout(checkForUpdate, 3000);
+    } else {
+      window.addEventListener("load", function () { setTimeout(checkForUpdate, 3000); });
+    }
+  }
+})();
+/* WWS-UPDATER:END */
+
+</script>
+</body>
+</html>
